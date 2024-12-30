@@ -1,6 +1,11 @@
-from datetime import timezone
+from django.utils import timezone
 
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 TYPE_CHOICES = (
@@ -14,19 +19,35 @@ STATUS_CHOICES = (
 )
 
 
+
+
+
 class DogUser(models.Model):
-    username = models.CharField(
+    first_name = models.CharField(
         max_length=30,
-        unique=True,
+        blank=True,
+        null=True,
+
     )
-    email = models.EmailField(unique=True)
+    last_name = models.CharField(
+        max_length=30,
+        blank=True,
+        null=True,
+    )
+
     phone_number = models.CharField(
         max_length=9,
     )
-    is_admin = models.BooleanField(default=False)
+    user = models.OneToOneField(
+       User,
+        on_delete=models.CASCADE,
+    )
 
-    def __str__(self):
-        return self.username
+    @property
+    def full_name(self):
+        if self.first_name and self.last_name:
+            return f"{self.first_name} {self.last_name}"
+        return self.first_name or self.last_name
 
 
 class DogPost(models.Model):
@@ -46,8 +67,8 @@ class DogPost(models.Model):
         max_length=100,
     )
     photo_url = models.URLField(
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
     description = models.TextField()
     last_seen_location = models.CharField(
