@@ -57,6 +57,7 @@ class DogPost(models.Model):
     date_posted = models.DateTimeField(
         null=True,
         blank=True,
+        auto_now_add=True,
     )
     user = models.ForeignKey(
         DogUser,
@@ -65,7 +66,7 @@ class DogPost(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return f"{self.type.capitalize()} - {self.name or 'Unnamed'}"
 
 
 class AdoptionApplication(models.Model):
