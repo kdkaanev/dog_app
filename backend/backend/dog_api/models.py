@@ -28,10 +28,11 @@ class DogUser(models.Model):
         blank=True,
     )
 
-
-
-    def __str__(self):
-        return self.username
+    @property
+    def full_name(self):
+        if self.first_name and self.last_name:
+            return f"{self.first_name} {self.last_name}"
+        return self.first_name or self.last_name
 
 
 class DogPost(models.Model):

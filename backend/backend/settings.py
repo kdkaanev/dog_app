@@ -99,7 +99,7 @@ DATABASES = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "dog_db",
+        "NAME": "dog_db1",
         "USER": "postgres",
         "PASSWORD": "postgres",
         "HOST": "127.0.0.1",
