@@ -2,13 +2,14 @@
 
 from django.contrib.auth import get_user_model
 from django.db import models
-
+from django.utils import timezone
 
 User = get_user_model()
 
 TYPE_CHOICES = (
-    ('lost', 'lost'),
-    ('found', 'found'),
+    ('lost', 'Lost'),
+    ('found', 'Found'),
+    ('adopted', 'Adopted'),
 )
 STATUS_CHOICES = (
     ('pending', 'pending'),
@@ -36,12 +37,8 @@ class DogUser(models.Model):
 
 
 class DogPost(models.Model):
-    type = models.CharField(
-        null=False,
-        blank=False,
-        choices=TYPE_CHOICES
-    )
-    name = models.CharField(
+
+    title = models.CharField(
         null=True,
         blank=True,
         max_length=100,
@@ -65,17 +62,22 @@ class DogPost(models.Model):
         blank=True,
         auto_now_add=True,
     )
+    status = models.CharField(
+        null=True,
+        blank=True,
+        choices=TYPE_CHOICES,
+    )
     user = models.ForeignKey(
-        DogUser,
+        User,
         on_delete=models.CASCADE,
         related_name='dog_posts',
     )
 
     def __str__(self):
-        return f"{self.type.capitalize()} - {self.name or 'Unnamed'}"
-
+        return f"{self.title.capitalize()}"
 
 class AdoptionApplication(models.Model):
+    title = models.CharField(max_length=100, default="")
     user = models.ForeignKey(
         DogUser,
         on_delete=models.CASCADE,
@@ -94,17 +96,24 @@ class AdoptionApplication(models.Model):
     message = models.TextField()
 
 
-class Comment(models.Model):
-    text = models.TextField()
 
-    post = models.ForeignKey(
+    def __str__(self):
+        return self.title
+
+class Comment(models.Model):
+    content = models.TextField()
+
+    dog_post = models.ForeignKey(
         DogPost,
         on_delete=models.CASCADE,
         related_name='comments',
     )
     user = models.ForeignKey(
-        DogUser,
+        User,
         on_delete=models.CASCADE,
         related_name='comments',
     )
-    timestamp = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Comment by {self.user.full_name} on {self.dog_post.title}"
