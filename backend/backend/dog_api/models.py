@@ -1,7 +1,10 @@
-from datetime import timezone
 
+
+from django.contrib.auth import get_user_model
 from django.db import models
 
+
+User = get_user_model()
 
 TYPE_CHOICES = (
     ('lost', 'lost'),
@@ -15,15 +18,17 @@ STATUS_CHOICES = (
 
 
 class DogUser(models.Model):
-    username = models.CharField(
-        max_length=30,
-        unique=True,
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=9)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
     )
-    email = models.EmailField(unique=True)
-    phone_number = models.CharField(
-        max_length=9,
-    )
-    is_admin = models.BooleanField(default=False)
+
+
 
     def __str__(self):
         return self.username
