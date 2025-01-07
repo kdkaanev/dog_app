@@ -40,8 +40,10 @@ export default {
 
 
 <template>
-  <HeaderPage @select="onSelect"/>
+  <article>
+    <HeaderPage @select="onSelect"/>
   <main>
     <component :is="page"/>
   </main>
+  </article>
 </template>

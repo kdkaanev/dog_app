@@ -10,7 +10,7 @@ export default {
 
 
 <nav>
-  <img src="../assets/icon.ico" alt="" width="80px">
+  <img src="../assets/icon.ico" alt="" width="60px">
       <ul>
         <li><a href="#" @click.prevent="$emit('select', 'HomePage')">Home</a></li>
         <li><a href="#" @click.prevent="$emit('select', 'LostDogs')">Lost</a></li>
@@ -28,7 +28,9 @@ export default {
 nav{
   display: flex;
   background-color:rgb(250 222 175);
-  justify-content: space-around;
+  justify-content: space-between;
+  border-radius: 4px;
+  padding:0 1rem 0 1rem  ;
 }
 
 
