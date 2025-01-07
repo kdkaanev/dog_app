@@ -1,14 +1,3 @@
-<!-- <script setup>
-
-import NavHeader from './NavHeader.vue';
-
-
-</script>
- -->
-
-
-
-
 
 <template>
     <div>

@@ -10,6 +10,7 @@ export default {
 
 
 <nav>
+  <img src="../assets/icon.ico" alt="" width="80px">
       <ul>
         <li><a href="#" @click.prevent="$emit('select', 'HomePage')">Home</a></li>
         <li><a href="#" @click.prevent="$emit('select', 'LostDogs')">Lost</a></li>
@@ -22,3 +23,13 @@ export default {
       </ul>
     </nav>
 </template>
+
+<style scoped>
+nav{
+  display: flex;
+  background-color:rgb(250 222 175);
+  justify-content: space-around;
+}
+
+
+</style>

@@ -8,12 +8,14 @@ import AdoptionDogs from '../src/pages/dogs/components/AdoptionDogs.vue';
 import Register from '../src/pages/users/components/SignupUser.vue';
 import Login from '../src/pages/users/components/LoginUser.vue';
 import PostDetails from '../src/pages/dogs/components/PostDetails.vue';
+import HomePage from './pages/home/HomePage.vue';
 
 
 
 export default {
   components: {
     HeaderPage,
+    HomePage,
     LostDogs,
     FoundDogs,
     AdoptionDogs,
@@ -23,7 +25,7 @@ export default {
   },
   data() {
     return {
-      page: 'home'
+      page: 'HomePage'
     }
   },
   methods: {
