@@ -1,10 +1,10 @@
-<script setup>
+<!-- <script setup>
 
 import NavHeader from './NavHeader.vue';
 
 
 </script>
-
+ -->
 
 
 
