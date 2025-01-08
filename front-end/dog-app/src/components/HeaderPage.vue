@@ -1,4 +1,4 @@
-<script>
+<script >
 export default {
  emits: ['select']
 
@@ -10,10 +10,12 @@ export default {
 
 
 <nav>
-  <img src="../assets/icon.ico" alt="" width="60px">
+  <a href="#"@click.prevent="$emit('select', 'HomePage')"><img src="../assets/icon.ico" alt="" width="60px"></a>
+  <p class="slogan">
+        Where Lost Paws Find Their Way Home
+    </p>
   
       <ul>
-        <li><a href="#" @click.prevent="$emit('select', 'HomePage')">Home</a></li>
         <li><a href="#" @click.prevent="$emit('select', 'LostDogs')">Lost</a></li>
         <li><a href="#" @click.prevent="$emit('select', 'FoundDogs')">Found</a></li>
         <li><a href="#" @click.prevent="$emit('select', 'AdoptionDogs')">Adopting</a></li>
@@ -32,6 +34,13 @@ nav{
   justify-content: space-between;
   border-radius: 4px;
   padding:0 1rem 0 1rem  ;
+}
+.slogan {
+font-family: "Playwrite AU SA", serif;
+  font-optical-sizing: auto;
+  font-weight:bold;
+  font-style: normal;
+  padding: 1rem;
 }
 
 
