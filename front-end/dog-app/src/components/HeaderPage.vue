@@ -11,6 +11,7 @@ export default {
 
 <nav>
   <img src="../assets/icon.ico" alt="" width="60px">
+  
       <ul>
         <li><a href="#" @click.prevent="$emit('select', 'HomePage')">Home</a></li>
         <li><a href="#" @click.prevent="$emit('select', 'LostDogs')">Lost</a></li>
