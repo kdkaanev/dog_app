@@ -8,7 +8,7 @@ import PostCart from '../../dogs/components/PostCart.vue';
 <template>
     <article class="background">
       
-        <PostCart />
+        <h1>lost</h1>
 
     </article>
 </template>

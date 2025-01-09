@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const axiosJD = axios.create({
-  baseURL: 'https://dummyjson.com',
+const axiosDA = axios.create({
+  baseURL: 'http://127.0.0.1:8000/',
 });
-export default axiosJD;
+export default axiosDA;

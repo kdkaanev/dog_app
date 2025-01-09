@@ -1,7 +1,28 @@
-<script setup>
-
+<script>
+import { getAllPosts } from '../../servvices/postServises';
 import PostCart from '../dogs/components/PostCart.vue';
 
+export default {
+  components: {
+    PostCart,
+  },
+  data() {
+    return {
+      posts: [],
+    };
+  },
+  async created() {
+    this.posts = await getAllPosts();
+  },
+  computed: {
+    lostPosts() {
+      return this.posts.filter((post) => post.status === 'lost');
+    },
+    foundPosts() {
+      return this.posts.filter((post) => post.status === 'found');
+    },
+  },
+};
 
 </script>
 
@@ -12,12 +33,8 @@ import PostCart from '../dogs/components/PostCart.vue';
    
     <article class="background">
     
-      <PostCart/>
-      <PostCart/>
-      <PostCart/>
-      <PostCart/>
-      <PostCart/>
-      <PostCart/>
+      <PostCart v-for="post in posts" :key="post.id" :post="post"/>
+     
 
     </article>
     
