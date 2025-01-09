@@ -1,6 +1,26 @@
+<script setup>
+import PostCart from '../../dogs/components/PostCart.vue';
+</script>
+
+
+
+
 <template>
-    <div>
-        <h1>Found Dogs</h1>
-        <p>These dogs are found!</p>
-    </div>
+    <article class="background">
+      
+        <PostCart />
+
+    </article>
 </template>
+
+<style scoped>
+.background{
+    background-color: hsl(177.14deg 94.34% 37.91%);
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill,240px);
+    justify-content: start;
+    gap:32px;
+}
+
+</style>

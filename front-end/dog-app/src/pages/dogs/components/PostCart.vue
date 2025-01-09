@@ -27,14 +27,15 @@
 .pics{
    
 width: 100%;
-padding: 1rem;
+
 }
 .cart{
     border-radius: 8px;
     width: 240px;
-    background-color:rgb(255 69 67);
+    background-color:rgb(190, 78, 76);
     text-align: center;
-    opacity: 0.9
+    opacity: 0.8;
+   
 }
 
 </style>
