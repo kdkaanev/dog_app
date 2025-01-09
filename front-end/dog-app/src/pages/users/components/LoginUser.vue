@@ -50,7 +50,7 @@ async function onLogin() {
 <template>
     <div class="form">
       <article>
-        <form>
+        <form @submit.prevent="">
          <fieldset>
             <legend>Login</legend>
             <div>

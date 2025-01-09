@@ -1,7 +1,7 @@
 <template>
     <div class="form">
       <article>
-        <form>
+        <form @submit.prevent="">
          <fieldset>
             <legend>Signup</legend>
             <div>

@@ -10,7 +10,7 @@
         
             <p>lost/found/adopted</p>
             <b></b>
-            <button class="primary">Explore</button>
+            <button class="primary">Details</button>
 
        </article> 
 
