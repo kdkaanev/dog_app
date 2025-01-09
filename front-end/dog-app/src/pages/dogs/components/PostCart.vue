@@ -5,6 +5,7 @@ import { getAllPosts } from '../../../servvices/postServises';
 const props = defineProps({
     post: Object,
 });
+const emits = defineEmits(['select']);
 
 
 </script>
@@ -23,9 +24,9 @@ const props = defineProps({
         
             <h2>{{ post.status }}</h2>
             <b></b>
-            <button>Details</button>
+            <button @click.prevent="$emit('select','post')">Details</button>
 
-       </article> 
+       </article>
 
        
        

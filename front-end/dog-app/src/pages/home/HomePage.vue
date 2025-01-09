@@ -6,6 +6,7 @@ export default {
   components: {
     PostCart,
   },
+
   data() {
     return {
       posts: [],
@@ -14,12 +15,10 @@ export default {
   async created() {
     this.posts = await getAllPosts();
   },
-  computed: {
-    lostPosts() {
-      return this.posts.filter((post) => post.status === 'lost');
-    },
-    foundPosts() {
-      return this.posts.filter((post) => post.status === 'found');
+  methods: {
+    handleSelect(postId = 4) {
+      console.log(postId);
+      this.$router.push({ name: 'PostDetails', params: { id: postId } });
     },
   },
 };
@@ -33,7 +32,7 @@ export default {
    
     <article class="background">
     
-      <PostCart v-for="post in posts" :key="post.id" :post="post"/>
+      <PostCart @select="handleSelect" v-for="post in posts" :key="post.id" :post="post"/>
      
 
     </article>

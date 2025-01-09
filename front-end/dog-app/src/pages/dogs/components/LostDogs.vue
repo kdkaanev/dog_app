@@ -15,7 +15,7 @@ import PostCart from '../../dogs/components/PostCart.vue';
 
 <style scoped>
 .background{
-    background-color: rgb(232 133 133);
+    background-color: #f9b9b9;
     display: grid;
 
     grid-template-columns: repeat(auto-fill,240px);
