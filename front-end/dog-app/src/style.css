@@ -11,6 +11,7 @@ body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
 }
 
 
+
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
 ul[role="list"], ol[role="list"] {
   list-style: none;
@@ -73,5 +74,11 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+#app{
+  
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 

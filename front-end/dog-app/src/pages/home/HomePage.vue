@@ -7,27 +7,34 @@ import PostCart from '../dogs/components/PostCart.vue';
 
 <template>
 
-   
-   
+  <div>
    
    
     <article class="background">
-      
+    
+      <PostCart/>
+      <PostCart/>
+      <PostCart/>
+      <PostCart/>
+      <PostCart/>
       <PostCart/>
 
     </article>
     
+  </div>
 
 </template>
 
 <style scoped>
+
 .background{
+    padding-top: 2rem;
     background: url(../../assets/final_logo.png)repeat;
     background-color:rgb(249 186 132);
     display: grid;
 
     grid-template-columns: repeat(auto-fill,240px);
-    justify-content: start;
+    justify-content: center;
     gap:32px;
 }
 

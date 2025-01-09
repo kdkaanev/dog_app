@@ -10,7 +10,9 @@ export default {
 
 
 <nav>
-  <a href="#"@click.prevent="$emit('select', 'HomePage')"><img src="../assets/icon.ico" alt="" width="60px"></a>
+  <div class="ico">
+    <a href="#" @click.prevent="$emit('select', 'HomePage')"><img src="../assets/icon.ico" alt="" width="60px"></a>
+  </div>
   <p class="slogan">
         Where Lost Paws Find Their Way Home
     </p>
@@ -41,7 +43,14 @@ font-family: "Playwrite AU SA", serif;
   font-weight:bold;
   font-style: normal;
   padding: 1rem;
+  
 }
+.ico{
+  padding: 0.5rem;
+ 
+  
+} 
+
 
 
 </style>
