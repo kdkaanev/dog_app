@@ -7,12 +7,11 @@ import PostCart from '../dogs/components/PostCart.vue';
 
 <template>
 
-   
-   
+  <div>
    
    
     <article class="background">
-      
+    
       <PostCart/>
       <PostCart/>
       <PostCart/>
@@ -22,15 +21,14 @@ import PostCart from '../dogs/components/PostCart.vue';
 
     </article>
     
+  </div>
 
 </template>
 
 <style scoped>
-#app{
-  max-width: 1024px;
-}
+
 .background{
-  
+    padding-top: 2rem;
     background: url(../../assets/final_logo.png)repeat;
     background-color:rgb(249 186 132);
     display: grid;

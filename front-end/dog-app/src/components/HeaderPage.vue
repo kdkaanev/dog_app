@@ -10,7 +10,7 @@ export default {
 
 
 <nav>
-  <a href="#"@click.prevent="$emit('select', 'HomePage')"><img src="../assets/icon.ico" alt="" width="60px"></a>
+  <a href="#" @click.prevent="$emit('select', 'HomePage')"><img src="../assets/icon.ico" alt="" width="60px"></a>
   <p class="slogan">
         Where Lost Paws Find Their Way Home
     </p>

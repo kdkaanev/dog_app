@@ -29,9 +29,11 @@
 .pics{
    
 width: 100%;
+border-radius: 8px;
 
 }
 .cart{
+    border: 1px solid black;
     border-radius: 8px;
     width: 240px;
    
