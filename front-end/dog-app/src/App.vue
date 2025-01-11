@@ -2,7 +2,7 @@
 
 
 import HeaderPage from '../src/components/HeaderPage.vue';
-import Register from '../src/pages/users/components/SignupUser.vue';
+import Register from './pages/register/components/SignupUser.vue';
 import Login from '../src/pages/users/components/LoginUser.vue';
 import PostDetails from '../src/pages/dogs/components/PostDetails.vue';
 import HomePage from './pages/home/HomePage.vue';
