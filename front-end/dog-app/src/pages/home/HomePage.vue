@@ -1,3 +1,4 @@
+
 <script>
 import { getAllPosts } from '../../servvices/postServises';
 import PostCart from '../dogs/components/PostCart.vue';
@@ -15,31 +16,22 @@ export default {
   async created() {
     this.posts = await getAllPosts();
   },
-  methods: {
-    handleSelect(postId = 4) {
-      console.log(postId);
-      this.$router.push({ name: 'PostDetails', params: { id: postId } });
-    },
-  },
 };
-
 </script>
 
+
+
+
 <template>
-
   <div>
-   
-   
     <article class="background">
-    
-      <PostCart @select="handleSelect" v-for="post in posts" :key="post.id" :post="post"/>
-     
-
+      <PostCart v-for="post in posts" :key="post.id" :post="post" />
     </article>
-    
   </div>
-
 </template>
+
+
+
 
 <style scoped>
 

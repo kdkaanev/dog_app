@@ -11,19 +11,21 @@ export default {
 
 <nav>
   <div class="ico">
-    <a href="#" @click.prevent="$emit('select', 'HomePage')"><img src="../assets/icon.ico" alt="" width="60px"></a>
+    <router-link to="/"><img src="../assets/icon.ico" alt="" width="60px"></router-link>
+    <!-- <a href="#" @click.prevent="$emit('select', 'HomePage')"><img src="../assets/icon.ico" alt="" width="60px"></a> -->
   </div>
   <p class="slogan">
         Where Lost Paws Find Their Way Home
     </p>
   
       <ul>
-        <li><a href="#" @click.prevent="$emit('select', 'LostDogs')">Lost</a></li>
-        <li><a href="#" @click.prevent="$emit('select', 'FoundDogs')">Found</a></li>
-        <li><a href="#" @click.prevent="$emit('select', 'AdoptionDogs')">Adopting</a></li>
-        <li><a href="#" @click.prevent="$emit('select', 'register')">Register</a></li>
-        <li><a href="#" @click.prevent="$emit('select', 'login')">Login</a></li>
-        <li><a href="#" @click.prevent="$emit('select', 'PostDetails')">Posts</a></li>
+        <ul>
+
+  <li><router-link to="/register">Register</router-link></li>
+  <li><router-link to="/login">Login</router-link></li>
+  
+</ul>
+
         
       </ul>
     </nav>
@@ -34,6 +36,7 @@ nav{
   display: flex;
   background-color:rgb(250 222 175);
   justify-content: space-between;
+  gap: 3rem;
   border-radius: 4px;
   padding:0 1rem 0 1rem  ;
 }
