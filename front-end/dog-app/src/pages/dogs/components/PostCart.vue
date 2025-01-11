@@ -1,42 +1,23 @@
 <script setup>
-import { ref } from 'vue';
-import { getAllPosts } from '../../../servvices/postServises';
-
-const props = defineProps({
-    post: Object,
+defineProps({
+  post: Object,
 });
-const emits = defineEmits(['select']);
-
-
 </script>
 
 
 
+
 <template>
-
-
-
-
+    <router-link :to="{ name: 'PostDetails', params: { id: post.id } }">
+      <div class="cart" :class="post.status === 'lost' ? 'lost' : 'found'">
+        <img :src="post.photo_url" alt="Dog Image" />
+        <h3>{{ post.status }}</h3>
+      </div>
+    </router-link>
+  </template>
+  
  
-       <article class="cart" :class="post.status">
-        
-        <img class="pics" :src="post.photo_url" alt="#">
-        
-            <h2>{{ post.status }}</h2>
-            <b></b>
-            <button @click.prevent="$emit('select','post')">Details</button>
-
-       </article>
-
-       
-       
-            
-
-
-</template>
-
-
-
+  
 
 <style scoped>
 
