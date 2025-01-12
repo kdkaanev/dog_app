@@ -57,7 +57,10 @@ async function handleSubmit() {
 
 
 <template>
- <form submit.prevent="handleSubmit" >
+<div class="form">
+<article>
+
+  <form submit.prevent="handleSubmit" >
   <FormFieldset title="Username" :errors="v$.username.$errors">
     <input v-model="v$.username.$model" type="text" placeholder="Enter Username"/>
    </FormFieldset>
@@ -78,7 +81,10 @@ async function handleSubmit() {
     </FormFieldset>
 
     <button @click.prevent="handleSubmit">Submit</button>
+
  </form>
+</article>
+</div>
   </template>
 
 
@@ -91,7 +97,8 @@ async function handleSubmit() {
 }
 .form article {
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
 
 }
 </style>
+

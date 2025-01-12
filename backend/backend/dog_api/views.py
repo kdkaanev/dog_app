@@ -1,24 +1,26 @@
-from django.shortcuts import render
+import token
 
 # Create your views here.
 from rest_framework.viewsets import ModelViewSet
 from .models import DogPost, Comment
 from .serializers import DogPostSerializer, CommentSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
+
 from django_filters.rest_framework import DjangoFilterBackend
 
 from django.contrib.auth.models import User
-from rest_framework.views import APIView
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.response import Response
-from rest_framework import status
+
 from django.contrib.auth import login, logout, authenticate
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
+
 from rest_framework.permissions import IsAuthenticated
 from .models import DogPost
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
+from django.http import JsonResponse
+from django.middleware.csrf import get_token
+from rest_framework.permissions import AllowAny
+from django.contrib.auth import authenticate, login
 
 
 class DogPostViewSet(ModelViewSet):
@@ -44,6 +46,9 @@ class SignupView(APIView):
         return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
 
 
+
+
+
 class LoginView(APIView):
     permission_classes = [AllowAny]
 
@@ -51,11 +56,51 @@ class LoginView(APIView):
         username = request.data.get("username")
         password = request.data.get("password")
 
+        # Authenticate user
         user = authenticate(username=username, password=password)
 
-        login(request, user)
-        return Response({"message": "Login successful"}, status=status.HTTP_200_OK)
+        # Check if authentication failed
+        if user is None:
+            return Response({"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST)
 
+        # Log in user
+        login(request, user)
+
+        csrf_token = get_token(request)
+
+        # Get related DogUser instance (if exists)
+        dog_user = getattr(user, 'dog_user', None)
+
+
+        # Prepare DogUser data
+        dog_user_data = None
+        if dog_user:
+            dog_user_data = {
+                "id": dog_user.id,
+                "phone": dog_user.phone_number if hasattr(dog_user, "phone_number") else None,
+
+            }
+
+
+        # Return response
+        response = Response({
+            "id": user.id,
+            "message": "Login successful",
+            "username": username,
+            "email": user.email,
+            "dog_user": dog_user_data,
+        }, status=status.HTTP_200_OK)
+
+        # Set CSRF token as a cookie
+        response.set_cookie(
+            key="csrftoken",
+            value=csrf_token,
+            httponly=False,  # Allow frontend to access it
+            secure=True,  # Set to False in local dev (use True for HTTPS)
+            samesite="Lax"
+        )
+
+        return response
 
 def sign_out(request):
     logout(request)

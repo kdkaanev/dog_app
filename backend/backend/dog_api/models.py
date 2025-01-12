@@ -27,6 +27,7 @@ class DogUser(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
+        related_name='dog_user',
     )
 
     @property
@@ -34,6 +35,11 @@ class DogUser(models.Model):
         if self.first_name and self.last_name:
             return f"{self.first_name} {self.last_name}"
         return self.first_name or self.last_name
+    def initials(self):
+        if self.first_name and self.last_name:
+            return f"{self.first_name[0]} {self.last_name[0]}"
+        return self.first_name[0] or self.last_name[0]
+
 
 
 class DogPost(models.Model):
