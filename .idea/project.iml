@@ -18,7 +18,7 @@
       <excludeFolder url="file://$MODULE_DIR$/aglorithm-whit-python/Graph" />
       <excludeFolder url="file://$MODULE_DIR$/backend/aglorithm-whit-python/Graph" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.12 (backend)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.12 (project)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">
