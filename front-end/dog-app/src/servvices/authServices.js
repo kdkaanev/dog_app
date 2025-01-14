@@ -41,6 +41,7 @@ export async function loginUser({username, password}, expires=30) {
         
     
         console.log('User logged in:', response);
+        
         alert('Login successful!'); // Show success message
         return response.data;
         
