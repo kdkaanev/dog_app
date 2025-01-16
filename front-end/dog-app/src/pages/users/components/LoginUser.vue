@@ -32,6 +32,9 @@ export default {
       },
     };
   },
+  mounted() {
+    this.userStore.reAuthUser();
+  },
   methods: {
     async onLogin() {
       const isValid = await this.v$.$validate();

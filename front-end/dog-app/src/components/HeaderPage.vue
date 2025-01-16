@@ -18,13 +18,12 @@ export default {
         Where Lost Paws Find Their Way Home
     </p>
   
-      <ul>
-        <ul>
+  
+        <ul class="nav-links">
 
   <li><router-link to="/register">Register</router-link></li>
   <li><router-link to="/login">Login</router-link></li>
   
-</ul>
 
         
       </ul>
@@ -34,6 +33,7 @@ export default {
 <style scoped>
 nav{
   display: flex;
+  flex-wrap: wrap;
   background-color:rgb(250 222 175);
   justify-content: space-between;
   gap: 3rem;
@@ -46,13 +46,22 @@ font-family: "Playwrite AU SA", serif;
   font-weight:bold;
   font-style: normal;
   padding: 1rem;
+  flex-grow: 1;
+  flex-basis: 200;
   
 }
 .ico{
   padding: 0.5rem;
- 
+
+ flex-grow: 1;
+  flex-basis: 200;
   
 } 
+.nav-links{
+
+  flex-grow: 1;
+  flex-basis: 200;
+}
 
 
 

@@ -8,6 +8,7 @@ function getCSRFToken() {
 
 const ENDPOINT = 'auth/';
 
+
 export async function registerUser(user) {
     try {
         const response = await axiosDA.post(`/${ENDPOINT}signup/`, {
@@ -33,9 +34,7 @@ export async function loginUser({username, password}, expires=30) {
           expires,
 
         }, {
-            headers: {
-                'X-CSRFToken': getCSRFToken(),
-            },
+           
             withCredentials: false,
         });
         
@@ -49,4 +48,17 @@ export async function loginUser({username, password}, expires=30) {
         console.error('Login error:', error.response?.data || error.message);
         alert('Login failed: ' + (error.response?.data?.detail || 'Try again.'));
     }
+}
+export async function getCurrentUser(csrftoken) {S
+  try {
+    const res = await axiosDA.get(`${ENDPOINT}/me`, {
+      headers: {
+        Authorization: `Bearer ${csrftoken}`,
+      },
+    });
+    return res.data;
+  }
+  catch (e) {
+    console.error('Ops something went wrong', e);
+  }
 }
