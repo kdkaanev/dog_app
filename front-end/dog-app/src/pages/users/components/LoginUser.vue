@@ -1,8 +1,8 @@
-<script>
+<script >
 import FormFieldset from '../../register/components/FormFieldset.vue';
 import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { loginUser } from '../../../servvices/authServices';
+import { loginUser} from '../../../servvices/authServices';
 import { useUserStore } from '../../../stores/useUserStore';
 
 export default {
@@ -32,9 +32,7 @@ export default {
       },
     };
   },
-  mounted() {
-    this.userStore.reAuthUser();
-  },
+
   methods: {
     async onLogin() {
       const isValid = await this.v$.$validate();
@@ -44,7 +42,11 @@ export default {
       await this.userStore.loginUser(this.form);
     },
   },
+  async mounted() {
+    await this.userStore.reAuthUser();
+  },
 };
+
 
 
 </script>

@@ -1,10 +1,10 @@
 import axiosDA from '../config/axiosinstance';
+const token = localStorage.getItem("token");
 
-function getCSRFToken() {
-  return document.cookie.split('; ')
-    .find(row => row.startsWith('csrftoken='))
-    ?.split('=')[1];
-}
+const getCsrfToken = () => {
+  const match = document.cookie.match(/csrftoken=([^;]+)/);
+  return match ? match[1] : null;
+};
 
 const ENDPOINT = 'auth/';
 
@@ -28,6 +28,8 @@ export async function registerUser(user) {
 
 export async function loginUser({username, password}, expires=30) {
     try {
+      const csrfToken = getCsrfToken();
+     
         const response = await axiosDA.post(`/${ENDPOINT}login/`, {
           username: username,
           password: password,
@@ -35,11 +37,15 @@ export async function loginUser({username, password}, expires=30) {
 
         }, {
            
-            withCredentials: false,
+            withCredentials: true,
+            headers: {
+              'X-CSRFToken': csrfToken,
+            },
         });
         
     
         console.log('User logged in:', response);
+        console.log('CSRF Token:', csrfToken);
         
         alert('Login successful!'); // Show success message
         return response.data;
@@ -49,16 +55,40 @@ export async function loginUser({username, password}, expires=30) {
         alert('Login failed: ' + (error.response?.data?.detail || 'Try again.'));
     }
 }
-export async function getCurrentUser(csrftoken) {S
+export async function getCurrentUser() {
+  console.log(`/${ENDPOINT}me/`);
+  const csrfToken = getCsrfToken();
+  console.log('CSRF Token:', csrfToken);
   try {
-    const res = await axiosDA.get(`${ENDPOINT}/me`, {
+    if (!csrfToken) {
+      throw new Error('CSRF token not found in cookies');
+    }
+    const res = await axiosDA.get(`/${ENDPOINT}me/`, {
+      withCredentials: true,
+      
       headers: {
-        Authorization: `Bearer ${csrftoken}`,
+        'X-CSRFToken': getCsrfToken(),
       },
+    
     });
     return res.data;
   }
   catch (e) {
     console.error('Ops something went wrong', e);
+  }
+}
+export async function logoutUser() {
+  try {
+    const csrfToken = getCsrfToken();
+    const res = await axiosDA.post(`/${ENDPOINT}logout/`, {
+      headers: {
+        'X-CSRFToken': csrfToken,
+      },
+    });
+    console.log('User logged out:', res.data);
+    alert('Logout successful!'); // Show success message
+  } catch (error) {
+    console.error('Logout error:', error.response?.data || error.message);
+    alert('Logout failed: ' + (error.response?.data?.detail || 'Try again.'));
   }
 }

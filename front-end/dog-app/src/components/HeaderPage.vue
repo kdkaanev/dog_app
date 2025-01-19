@@ -1,6 +1,21 @@
 <script >
+import { useUserStore } from '../stores/useUserStore';
+
 export default {
- emits: ['select']
+ emits: ['select'],
+ setup() {
+   return {
+     userStore: useUserStore(),
+   };
+ },
+ methods: {
+   onLogOut() {
+     console.log('Logging out');
+     localStorage.clear();
+     this.userStore.logoutUser();
+      this.$router.push('/');
+   },
+ },
 
 }
 </script>
@@ -23,6 +38,7 @@ export default {
 
   <li><router-link to="/register">Register</router-link></li>
   <li><router-link to="/login">Login</router-link></li>
+  <li><a v-on:click="onLogOut" href="#">Logout</a></li>
   
 
         
