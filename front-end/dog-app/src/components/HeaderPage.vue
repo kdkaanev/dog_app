@@ -14,7 +14,11 @@ export default {
      localStorage.clear();
      this.userStore.logoutUser();
       this.$router.push('/');
+      
    },
+ },
+ unmounted() {
+   this.userStore.logoutUser();
  },
 
 }
