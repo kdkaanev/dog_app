@@ -9,11 +9,10 @@ export default {
    };
  },
  methods: {
-   onLogOut() {
-     console.log('Logging out');
-     localStorage.clear();
-     this.userStore.logoutUser();
-      this.$router.push('/');
+   async onLogOut() {
+    const userStore = useUserStore();
+      await userStore.logoutUser();
+      this.$router.push("/login"); 
       
    },
  },

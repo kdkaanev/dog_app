@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { loginUser, getCurrentUser } from "../servvices/authServices";
+import { loginUser, getCurrentUser, logoutUser } from "../servvices/authServices";
 
 // Utility to get cookies
 function getCookie(name) {
@@ -56,11 +56,15 @@ export const useUserStore = defineStore("userStore", {
       return false;
     },
     async logoutUser() {
-      console.log('Logging out user:', this.user);
-      this.user = null; // Clear the user data on logout
+      const success = await logoutUser();
+      if (success) {
+        this.user = null; // Clear user state
+        console.log("User logged out.");
     }
   },
+  },
 });
+
 
 
 

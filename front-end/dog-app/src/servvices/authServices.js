@@ -77,18 +77,23 @@ export async function getCurrentUser() {
     console.error('Ops something went wrong', e);
   }
 }
+
+
 export async function logoutUser() {
   try {
     const csrfToken = getCsrfToken();
-    const res = await axiosDA.post(`/${ENDPOINT}logout/`, {
+    const response = await axiosDA.post(`/${ENDPOINT}logout/`, {}, {
+
+      withCredentials: true,
       headers: {
         'X-CSRFToken': csrfToken,
       },
     });
-    console.log('User logged out:', res.data);
-    alert('Logout successful!'); // Show success message
+    
+    console.log("Logout successful:", response.data);
+    return true;
   } catch (error) {
-    console.error('Logout error:', error.response?.data || error.message);
-    alert('Logout failed: ' + (error.response?.data?.detail || 'Try again.'));
+    console.error("Error logging out:", error.response?.data || error.message);
+    return false;
   }
 }
