@@ -1,5 +1,5 @@
 import axiosDA from '../config/axiosinstance';
-const token = localStorage.getItem("token");
+
 
 const getCsrfToken = () => {
   const match = document.cookie.match(/csrftoken=([^;]+)/);
