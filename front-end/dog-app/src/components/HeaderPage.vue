@@ -4,7 +4,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faUser, faCog, faSignOutAlt, faRegistered, faSign, faSignIn, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faUser, faCog, faSignOutAlt,faRegistered, faSignInAlt)
+library.add(faUser, faCog, faSignOutAlt,faRegistered, faSignInAlt, faUser)
 
 
 export default {
@@ -100,7 +100,9 @@ export default {
       
     </ul>
     <ul class="dropdown-menu" v-if="userStore.user">
+      <li><router-link :to="{ name: 'profile' }"><font-awesome-icon icon="user" /><span style="padding-right: 20px"></span> Profile</router-link></li>
       <li ><a  v-on:click="onLogOut" href="#"><font-awesome-icon icon="right-from-bracket" /> <span style="padding-right: 20px"></span>Logout</a></li>
+
     </ul>
     </div>
     

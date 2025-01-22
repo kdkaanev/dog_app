@@ -4,7 +4,6 @@ import { loginUser, getCurrentUser, logoutUser } from "../servvices/authServices
 // Utility to get cookies
 function getCookie(name) {
   const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-  console.log('match:', match);
   return match ? match[2] : null;
 }
 const csrfToken = getCookie('csrftoken');
@@ -22,40 +21,6 @@ export const useUserStore = defineStore("userStore", {
           this.user = response; // Store user data on successful login
           return true;
         }
-        // import { defineStore } from "pinia";
-        // import { loginUser, getCurrentUser } from "../servvices/authServices";
-        
-        // const LOGIN_EXPIRES = 30;
-        // const COKIE_NAME = 'csrftoken';
-        
-        // export const useUserStore = defineStore('userStore',{
-        //     state: () => ({
-        //         user: null,
-        //     }),
-        //     actions: {
-        //         async loginUser(logindata){
-        //           const response = await loginUser(logindata, LOGIN_EXPIRES);
-        //           if(!response) return false;
-        
-        //           this.user = response; 
-        //         },
-        //         async reAuthUser() {
-        //           if (this.user)
-        //             return false;
-        //           const persistedUserToken = COKIE_NAME;
-        //           console.log('persistedUserToken:', persistedUserToken);
-        //           if (!persistedUserToken)
-        //             return false;
-        //           const profile = await getCurrentUser(persistedUserToken);
-        //           if (profile) {
-        //             this.user = profile;
-        //             return true;
-        //           }
-        //           return false;
-        //         }
-        //     },
-        //   });
-        
         
         
       } catch (error) {
@@ -65,7 +30,6 @@ export const useUserStore = defineStore("userStore", {
     },
 
     async reAuthUser() {
-      console.log('All cookies:', document.cookie);
       try {
         // Check if the user is already authenticated in the state
         if (this.user) {
