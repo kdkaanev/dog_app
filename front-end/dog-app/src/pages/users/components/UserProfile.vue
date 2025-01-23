@@ -28,16 +28,16 @@ export default{
         };
 
     },
-
-  async mounted() {
+    async mounted() {
+    
     try {
       const profile = await getCurrentUser();
       this.userProfile = profile; // Assign fetched profile data
-      console.log('User profile:', profile);
     } catch (error) {
       console.error('Failed to fetch user profile:', error);
     }
-  await this.userStore.reAuthUser();
+    
+  
 },
 };
 
@@ -61,7 +61,7 @@ export default{
           <font-awesome-icon icon="phone" /> <strong>Phone Number:</strong> {{ userProfile.dog_user.phone_number }}
         </div>
             <router-link to="/edit-profile">Edit Profile</router-link>
-            <router-link to="/user-posts">My Posts</router-link>
+      
         
       </div>
       

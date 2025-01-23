@@ -4,6 +4,7 @@ import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { useUserStore } from '../../../stores/useUserStore';
 import { saveUserProfile } from '../../../servvices/authServices';
+import { getCurrentUser } from '../../../servvices/authServices';
 
 export default {
   components: {
@@ -34,6 +35,16 @@ export default {
       },
     };
   },
+  async created() {
+    const profile = await getCurrentUser();
+    if(profile){
+      console.log('Profile:', profile);
+      this.form.first_name = profile.dog_user.first_name;
+      this.form.last_name = profile.dog_user.last_name;
+      this.form.phone_number = profile.dog_user.phone_number;
+    }
+   
+  },
   methods: {
     async onUpdate() {
       const isValid = await this.v$.$validate();
@@ -41,7 +52,7 @@ export default {
         return;
       }
       await this.userStore.saveUserProfile(this.form);
-      this.$router.push("/"); 
+      this.$router.push("/profile"); 
     },
   },
 

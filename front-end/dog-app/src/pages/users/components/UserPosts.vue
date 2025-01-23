@@ -32,7 +32,9 @@ export default {
 <template>
     <div>
       <article class="background">
+        
         <PostCart v-for="post in posts" :key="post.id" :post="post" />
+        <router-link to="/">Add</router-link>
       </article>
     </div>
   </template>
