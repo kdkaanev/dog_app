@@ -1,10 +1,14 @@
 <script>
 import FormFieldset from '../../register/components/FormFieldset.vue';
 import useVuelidate from '@vuelidate/core';
-import { email, required } from '@vuelidate/validators';
-import { getCurrentUser, saveUserProfile} from '../../../servvices/authServices';
+import { getCurrentUser} from '../../../servvices/authServices';
 import { useUserStore } from '../../../stores/useUserStore';
 import { ref } from 'vue';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faUser, faCog, faSignOutAlt, faRegistered, faSign, faSignIn, faSignInAlt, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faUser, faCog, faSignOutAlt,faRegistered, faSignInAlt, faUser, faPhone,faEnvelope)
 export default{
     name: 'UserProfile',
     components: {
@@ -48,20 +52,23 @@ export default{
       <h1>User Profile</h1>
       <div class="profile-card">
         <div class="profile-item">
-          <font-awesome-icon icon="user" /> <strong>Name:</strong> {{ userProfile.username}}
+          <font-awesome-icon icon="user" /> <strong>Name:</strong> {{ userProfile.dog_user.full_name}}
         </div>
         <div class="profile-item">
-          <font-awesome-icon icon="user" /> <strong>email:</strong> {{ userProfile.email }}
+          <font-awesome-icon icon="envelope" /> <strong>email:</strong> {{ userProfile.email }}
         </div>
         <div class="profile-item">
-          <font-awesome-icon icon="user" /> <strong>Phone Number:</strong> {{ userProfile.dog_user.id }}
+          <font-awesome-icon icon="phone" /> <strong>Phone Number:</strong> {{ userProfile.dog_user.phone_number }}
         </div>
             <router-link to="/edit-profile">Edit Profile</router-link>
+            <router-link to="/user-posts">My Posts</router-link>
         
       </div>
       
     </div>
+    
   </template>
+
 <style scoped>
 .user-profile, .user-profile-edit {
   max-width: 600px;

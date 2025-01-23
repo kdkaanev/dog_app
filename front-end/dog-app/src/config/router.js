@@ -5,6 +5,8 @@ import LoginUser from '../pages/users/components/LoginUser.vue';
 import PostDetails from '../pages/dogs/components/PostDetails.vue';
 import UserProfile from '../pages/users/components/UserProfile.vue';
 import EditProfile from '../pages/users/components/EditProfile.vue';
+import UserDashboard from '../pages/users/components/UserDashboard.vue';
+import UserPosts from '../pages/users/components/UserPosts.vue';
 
 
 const routes = [
@@ -14,6 +16,8 @@ const routes = [
   {path: '/dogs/:id', name: 'PostDetails', component: PostDetails, props: true},
   {path: '/profile', name: 'profile', component: UserProfile},
   {path: '/edit-profile', name: 'edit-profile', component: EditProfile},
+  {path: '/dashboard', name: 'dashboard', component: UserDashboard},
+  {path: '/user-posts', name: 'user-posts', component: UserPosts},
   
 
 

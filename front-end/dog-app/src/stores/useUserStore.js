@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { loginUser, getCurrentUser, logoutUser } from "../servvices/authServices";
+import { loginUser, getCurrentUser, logoutUser, saveUserProfile } from "../servvices/authServices";
 
 // Utility to get cookies
 function getCookie(name) {
@@ -53,6 +53,18 @@ export const useUserStore = defineStore("userStore", {
         console.error("Re-authentication failed:", error);
       }
 
+      return false;
+    },
+    async saveUserProfile(profileData) {
+      try {
+        const response = await saveUserProfile(profileData);
+        if (response) {
+          this.user = response; // Update user state with new data
+          return true;
+        }
+      } catch (error) {
+        console.error("Error saving user profile:", error);
+      }
       return false;
     },
     async logoutUser() {

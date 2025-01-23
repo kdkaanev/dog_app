@@ -5,9 +5,9 @@ import router from './config/router'
 import { createPinia } from 'pinia'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faUser, faCog, faSignOutAlt, faRegistered, faSign, faSignIn, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faCog, faSignOutAlt, faRegistered, faSign, faSignIn, faSignInAlt, faPhoneAlt, faPhoneVolume } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faUser, faCog, faSignOutAlt,faRegistered, faSignInAlt)
+library.add(faUser, faCog, faSignOutAlt,faRegistered, faSignInAlt, faPhoneVolume, faPhoneAlt, faSignIn, faSign);
 
 
 const pinia = createPinia()

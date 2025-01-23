@@ -19,31 +19,34 @@ export default {
   data() {
     return {
       form: {
-        firstName: '',
-        lastName: '',
-        phoneNumber: '',
+        first_name: '',
+        last_name: '',
+        phone_number: '',
       },
     };
   },
   validations() {
     return {
       form: {
-        firstName: {required},
-        lastName:{required},
-        phoneNumber:{required},
+        first_name: {required},
+        last_name:{required},
+        phone_number:{required},
       },
     };
+  },
+  methods: {
+    async onUpdate() {
+      const isValid = await this.v$.$validate();
+      if (!isValid) {
+        return;
+      }
+      await this.userStore.saveUserProfile(this.form);
+      this.$router.push("/"); 
+    },
   },
 
  
   async mounted() {
-    try {
-      const profile = await saveUserProfile();
-      this.userProfile = profile; // Assign fetched profile data
-      console.log('User profile:', profile);
-    } catch (error) {
-      console.error('Failed to fetch user profile:', error);
-    }
     await this.userStore.reAuthUser();
   },
 };
@@ -56,17 +59,17 @@ export default {
 <template>
 <div class="form">
 <article>
-  <form @submit.prevent="onLogin">
-  <FormFieldset title="First Name" :errors="v$.form.firstName.$errors">
-    <input v-model="v$.form.firstName.$model" type="text" placeholder="Enter First Name"/>
+  <form @submit.prevent="onUpdate">
+  <FormFieldset title="First Name" :errors="v$.form.first_name.$errors">
+    <input v-model="v$.form.first_name.$model" type="text" placeholder="Enter First Name"/>
    </FormFieldset>
-   <FormFieldset title="Last Name" :errors="v$.form.lastName.$errors">
-    <input v-model="v$.form.lastName.$model" type="text" placeholder="Enter Last Name"/>
+   <FormFieldset title="Last Name" :errors="v$.form.last_name.$errors">
+    <input v-model="v$.form.last_name.$model" type="text" placeholder="Enter Last Name"/>
    </FormFieldset>
-    <FormFieldset title="Phone number" :errors="v$.form.phoneNumber.$errors">
+    <FormFieldset title="Phone number" :errors="v$.form.phone_number.$errors">
       <input 
-      v-model="v$.form.phoneNumber.$model"
-      type="number" placeholder="Enter Password"/>
+      v-model="v$.form.phone_number.$model"
+      type="number" placeholder="Enter Number"/>
     </FormFieldset>
   
     
