@@ -102,8 +102,8 @@ export default {
     </ul>
     <ul class="dropdown-menu" v-if="userStore.user">
       <li><router-link :to="{ name: 'profile' }"><font-awesome-icon icon="user" /><span style="padding-right: 20px"></span> Profile</router-link></li>
-      <li ><a  v-on:click="onLogOut" href="#"><font-awesome-icon icon="right-from-bracket" /> <span style="padding-right: 20px"></span>Logout</a></li>
       <li><router-link :to="{name: 'user-posts'}"><font-awesome-icon icon="dog" /><span style="padding-right: 20px"></span> Posts</router-link></li>
+      <li ><a  v-on:click="onLogOut" href="#"><font-awesome-icon icon="right-from-bracket" /> <span style="padding-right: 20px"></span>Logout</a></li>
 
     </ul>
     </div>
