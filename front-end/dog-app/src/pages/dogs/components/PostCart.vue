@@ -2,6 +2,7 @@
 defineProps({
   post: Object,
 });
+
 </script>
 
 

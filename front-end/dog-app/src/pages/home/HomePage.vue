@@ -2,10 +2,17 @@
 <script>
 import { getAllPosts } from '../../servvices/postServises';
 import PostCart from '../dogs/components/PostCart.vue';
+import { useUserStore } from '../../stores/useUserStore';
 
 export default {
   components: {
     PostCart,
+  },
+  setup() {
+    return {
+      userStore: useUserStore(),
+      
+    };
   },
 
   data() {
@@ -16,6 +23,10 @@ export default {
   async created() {
     this.posts = await getAllPosts();
   },
+  async mounted() {
+    await this.userStore.reAuthUser();
+  },
+  
 };
 </script>
 

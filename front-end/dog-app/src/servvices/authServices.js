@@ -44,9 +44,7 @@ export async function loginUser({username, password}, expires=30) {
         });
         
     
-        console.log('User logged in:', response);
-        console.log('CSRF Token:', csrfToken);
-        
+       
         alert('Login successful!'); // Show success message
         return response.data;
         
@@ -77,7 +75,22 @@ export async function getCurrentUser() {
     console.error('Ops something went wrong', e);
   }
 }
-
+export async function saveUserProfile(profileData) {
+  try {
+    const response = await axiosDA.patch(`/${ENDPOINT}me/`, profileData,{
+      withCredentials: true,
+      
+      headers: {
+        'X-CSRFToken': getCsrfToken(),
+      },
+    
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error saving user profile:', error);
+    throw error;
+  }
+}
 
 export async function logoutUser() {
   try {
