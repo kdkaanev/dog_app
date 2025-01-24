@@ -7,6 +7,7 @@ import UserProfile from '../pages/users/components/UserProfile.vue';
 import EditProfile from '../pages/users/components/EditProfile.vue';
 import UserDashboard from '../pages/users/components/UserDashboard.vue';
 import UserPosts from '../pages/users/components/UserPosts.vue';
+import AddPost from '../pages/dogs/components/AddPost.vue';
 
 
 const routes = [
@@ -18,6 +19,7 @@ const routes = [
   {path: '/edit-profile', name: 'edit-profile', component: EditProfile},
   {path: '/dashboard', name: 'dashboard', component: UserDashboard},
   {path: '/user-posts', name: 'user-posts', component: UserPosts},
+  {path: '/add-post', name: 'add-post', component: AddPost},
   
 
 
