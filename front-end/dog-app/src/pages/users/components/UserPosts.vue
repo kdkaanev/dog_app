@@ -31,6 +31,7 @@ export default {
 
 <template>
     <div>
+      <h2 class="slogan">{{ userStore.user.username }} Posts</h2>
       <article class="background">
         <router-link to="/add-post">Add</router-link>
         <PostCart v-for="post in posts" :key="post.id" :post="post" />

@@ -40,7 +40,7 @@ export default {
         return;
       }
       await this.userStore.loginUser(this.form);
-      this.$router.push("/"); 
+      this.$router.push("/"); TODO:'redirect to prevues page' 
     },
   },
   async mounted() {
