@@ -6,9 +6,9 @@ import { useUserStore } from '../../../stores/useUserStore';
 import { ref } from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faUser, faCog, faSignOutAlt, faRegistered, faSign, faSignIn, faSignInAlt, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faCog, faSignOutAlt, faRegistered, faSign, faSignIn, faSignInAlt, faPhone, faEnvelope, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faUser, faCog, faSignOutAlt,faRegistered, faSignInAlt, faUser, faPhone,faEnvelope)
+library.add(faUser, faCog, faSignOutAlt,faRegistered, faSignInAlt, faUser, faPhone,faEnvelope, faLocationDot);
 export default{
     name: 'UserProfile',
     components: {
@@ -59,6 +59,9 @@ export default{
         </div>
         <div class="profile-item">
           <font-awesome-icon icon="phone" /> <strong>Phone Number:</strong> {{ userProfile.dog_user.phone_number }}
+        </div>
+        <div class="profile-item">
+          <font-awesome-icon icon="location-dot" /> <strong>Location:</strong> {{ userProfile.dog_user.location }}
         </div>
             <router-link to="/edit-profile">Edit Profile</router-link>
       

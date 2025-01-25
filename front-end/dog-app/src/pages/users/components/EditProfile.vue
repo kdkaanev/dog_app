@@ -1,7 +1,7 @@
 <script >
 import FormFieldset from '../../register/components/FormFieldset.vue';
 import useVuelidate from '@vuelidate/core';
-import { required } from '@vuelidate/validators';
+import { not, required } from '@vuelidate/validators';
 import { useUserStore } from '../../../stores/useUserStore';
 import { saveUserProfile } from '../../../servvices/authServices';
 import { getCurrentUser } from '../../../servvices/authServices';
@@ -23,6 +23,7 @@ export default {
         first_name: '',
         last_name: '',
         phone_number: '',
+        location: 'none',
       },
     };
   },
@@ -32,6 +33,7 @@ export default {
         first_name: {required},
         last_name:{required},
         phone_number:{required},
+        location:{},
       },
     };
   },
@@ -42,6 +44,7 @@ export default {
       this.form.first_name = profile.dog_user.first_name;
       this.form.last_name = profile.dog_user.last_name;
       this.form.phone_number = profile.dog_user.phone_number;
+      this.form.location = profile.dog_user.location;
     }
    
   },
@@ -81,6 +84,11 @@ export default {
       <input 
       v-model="v$.form.phone_number.$model"
       type="number" placeholder="Enter Number"/>
+    </FormFieldset>
+    <FormFieldset title="Location" :errors="v$.form.location.$errors">
+      <input 
+      v-model="v$.form.location.$model"
+      type="text" placeholder="Enter Location"/>
     </FormFieldset>
   
     

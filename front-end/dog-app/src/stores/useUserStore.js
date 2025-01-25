@@ -59,6 +59,7 @@ export const useUserStore = defineStore("userStore", {
       try {
         const response = await saveUserProfile(profileData);
         if (response) {
+          console.log("User profile saved:", profileData);
           this.user = response; // Update user state with new data
           return true;
         }
