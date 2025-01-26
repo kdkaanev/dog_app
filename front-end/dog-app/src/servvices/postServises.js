@@ -47,7 +47,7 @@ export async function addPost(postData) {
     console.error('Error adding post:', error);
     return null;
   }
-  await createPost({
+  await addPost({
     title: this.title,
     content: this.content,
     type: this.type,
