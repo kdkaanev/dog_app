@@ -1,5 +1,5 @@
 <script>
-import FormFieldset from '../../register/components/FormFieldset.vue';
+import FormFieldset from '../../components/FormFieldset.vue';
 import useVuelidate from '@vuelidate/core';
 import { getCurrentUser} from '../../../servvices/authServices';
 import { useUserStore } from '../../../stores/useUserStore';
@@ -48,7 +48,7 @@ export default{
 
 
 <template>
-    <div class="user-profile">
+    <div class="user-profile" v-if="userProfile">
       <h1>User Profile</h1>
       <div class="profile-card">
         <div class="profile-item">

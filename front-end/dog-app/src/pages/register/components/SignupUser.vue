@@ -2,7 +2,7 @@
 import useVuelidate from '@vuelidate/core';
 import { alphaNum, email, helpers, maxLength, minLength, numeric, required, sameAs } from '@vuelidate/validators';
 import { computed, reactive, ref, toRefs, watch } from 'vue';
-import FormFieldset from './FormFieldset.vue';
+import FormFieldset from '../../components/FormFieldset.vue';
 import { registerUser } from '../../../servvices/authServices/';
 import { useRouter } from 'vue-router';
 

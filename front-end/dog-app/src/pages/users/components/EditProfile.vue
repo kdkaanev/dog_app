@@ -1,5 +1,5 @@
 <script >
-import FormFieldset from '../../register/components/FormFieldset.vue';
+import FormFieldset from '../../components/FormFieldset.vue';
 import useVuelidate from '@vuelidate/core';
 import { not, required } from '@vuelidate/validators';
 import { useUserStore } from '../../../stores/useUserStore';
@@ -23,7 +23,7 @@ export default {
         first_name: '',
         last_name: '',
         phone_number: '',
-        location: 'none',
+        location: '',
       },
     };
   },

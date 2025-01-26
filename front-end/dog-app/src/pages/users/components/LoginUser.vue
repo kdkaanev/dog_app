@@ -1,5 +1,5 @@
 <script >
-import FormFieldset from '../../register/components/FormFieldset.vue';
+import FormFieldset from '../../components/FormFieldset.vue';
 import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { loginUser} from '../../../servvices/authServices';
