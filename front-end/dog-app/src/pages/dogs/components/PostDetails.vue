@@ -2,12 +2,15 @@
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
+import { useUserStore } from "../../../stores/useUserStore";
 
 const route = useRoute();
 const post = ref(null);
 const props = defineProps({
     posts: Object,
+    user: Object,
 });
+const userStore = useUserStore();
 
 onMounted(async () => {
   try {
@@ -34,7 +37,8 @@ onMounted(async () => {
     <p><strong>Last Seen:</strong> {{ post.last_seen_location }}</p>
     <p><strong>date:</strong> {{ post.date_posted}}</p>
 
-    <button>Contact</button>
+    <button type="button"  v-if="userStore.user">Edit</button>
+    <button type="button" v-else>Contact</button>
 
 
 
