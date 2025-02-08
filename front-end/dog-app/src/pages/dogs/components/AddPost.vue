@@ -2,7 +2,7 @@
 
 
 <script>
-import { addPost } from "../../../servvices/postServises";
+import { addPost, getPostById, updatePost } from "../../../servvices/postServises";
 import FormFieldset from "../../components/FormFieldset.vue";
 import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
