@@ -1,22 +1,32 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
+import { useUserStore } from "../../../stores/useUserStore";
 
 const route = useRoute();
 const post = ref(null);
 const props = defineProps({
     posts: Object,
+    user: Object,
 });
+const userStore = useUserStore();
 
 onMounted(async () => {
   try {
     const response = await axios.get(`http://127.0.0.1:8000/dogs/${route.params.id}`);
     post.value = response.data;
+    await userStore.reAuthUser();
+    
   } catch (error) {
     console.error("Error fetching post details:", error);
   }
+  
 });
+const isOwner = computed(() => {
+  return userStore.user?.id === post.value?.user;
+});
+
 </script>
 
 
@@ -34,7 +44,8 @@ onMounted(async () => {
     <p><strong>Last Seen:</strong> {{ post.last_seen_location }}</p>
     <p><strong>date:</strong> {{ post.date_posted}}</p>
 
-    <button>Contact</button>
+    <button type="button"  v-if="isOwner">Edit</button>
+    <button type="button" v-else>Contact</button>
 
 
 

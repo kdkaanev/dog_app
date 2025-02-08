@@ -35,6 +35,9 @@ export default {
 
 <template>
   <div>
+    <div v-if="userStore.user">
+      <router-link to="/user-posts">Add Post</router-link>
+    </div>
     <article class="background">
       <PostCart v-for="post in posts" :key="post.id" :post="post" />
     </article>
