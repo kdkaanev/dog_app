@@ -1,16 +1,21 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
-import { useRoute } from "vue-router";
+import { RouterLink, useRoute, useRouter } from "vue-router";
 import axios from "axios";
 import { useUserStore } from "../../../stores/useUserStore";
+import { deletePost} from "../../../servvices/postServises";
 
 const route = useRoute();
+const router = useRouter();
 const post = ref(null);
 const props = defineProps({
     posts: Object,
     user: Object,
 });
 const userStore = useUserStore();
+
+
+
 
 onMounted(async () => {
   try {
@@ -26,6 +31,24 @@ onMounted(async () => {
 const isOwner = computed(() => {
   return userStore.user?.id === post.value?.user;
 });
+const editPostHandler = () => {
+  router.push(`/edit-post/${post.value.id}`);
+  
+};
+
+const deletePostHandler = async () => {
+  if (confirm("Are you sure you want to delete this post?")) {
+    try {
+      await deletePost(post.value.id);
+      alert("Post deleted successfully!");
+      router.push("/"); // Redirect after deletion
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      alert("Failed to delete post.");
+    }
+  }
+};
+
 
 </script>
 
@@ -43,9 +66,15 @@ const isOwner = computed(() => {
     <p><strong>Breed:</strong> {{ post.breed }}</p>
     <p><strong>Last Seen:</strong> {{ post.last_seen_location }}</p>
     <p><strong>date:</strong> {{ post.date_posted}}</p>
-
-    <button type="button"  v-if="isOwner">Edit</button>
+    
+    <div class="but">
+      <button @click="editPostHandler" v-if="isOwner" >Edit</button>
+    <button @click="deletePostHandler" v-if="isOwner" >Delete</button>
     <button type="button" v-else>Contact</button>
+    </div>
+    
+
+    
 
 
 
@@ -64,5 +93,9 @@ const isOwner = computed(() => {
     background-color:transparent;
    
 }
+.but{
+    display: flex;
+    justify-content: space-around;
+} 
 </style>
  

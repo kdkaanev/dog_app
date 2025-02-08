@@ -47,11 +47,47 @@ export async function addPost(postData) {
     console.error('Error adding post:', error);
     return null;
   }
-  await addPost({
-    title: this.title,
-    content: this.content,
-    type: this.type,
-    breed: this.breed,
-    last_seen_location: this.lastSeenLocation,
-  });
+  
+}
+export async function getPostById(id) {
+  try {
+    const response = await axiosDA.get(`/${ENDPOINT}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error getting post:', error);
+    return null;
+  }
+}
+export async function updatePost(id, postData) {
+  const csrfToken = getCsrfToken();
+  try {
+    const response = await axiosDA.put(`/${ENDPOINT}/${id}/`, postData, {
+      withCredentials: true, // Include cookies for authentication
+      headers: {
+        'X-CSRFToken': csrfToken,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error updating post:', error);
+    return null;
+  }
+}
+
+
+
+export async function deletePost(id) {
+  const csrfToken = getCsrfToken();
+  try {
+    const response = await axiosDA.delete(`/${ENDPOINT}/${id}/`, {
+      withCredentials: true, // Include cookies for authentication
+      headers: {
+        'X-CSRFToken': csrfToken,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting post:', error);
+    return null;
+  }
 }
