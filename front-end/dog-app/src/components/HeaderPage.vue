@@ -57,6 +57,7 @@ export default {
   mounted() {
     // Close the dropdown when clicking outside
     document.addEventListener('click', this.handleClickOutside);
+    this.userStore.reAuthUser();
   },
   beforeUnmount() {
     document.removeEventListener('click', this.handleClickOutside);
