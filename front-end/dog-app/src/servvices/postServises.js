@@ -52,6 +52,7 @@ export async function addPost(postData) {
 export async function getPostById(id) {
   try {
     const response = await axiosDA.get(`/${ENDPOINT}/${id}`);
+    console.log('response:', response);
     return response.data;
   } catch (error) {
     console.error('Error getting post:', error);

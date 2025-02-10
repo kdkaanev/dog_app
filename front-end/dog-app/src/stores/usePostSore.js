@@ -1,12 +1,27 @@
 import { defineStore } from "pinia";
-import { addPost, getPostById, updatePost } from "../servvices/postServises";
+import { addPost,getUserPosts, updatePost, getAllPosts, getPostById } from "../servvices/postServises";
 
 export const usePostStore = defineStore("postStore", {
     state: () => ({
-        posts: [],
+        posts: null,
     }),
     
     actions: {
+        async fetchAllPosts() {
+        try {
+            const response = await getAllPosts();
+            if (response) {
+            this.posts = response;
+            return true;
+            }
+        } catch (error) {
+            console.error("Fetching posts failed:", error);
+        }
+        return false;
+        },
+
+
+
         async createPost(postData) {
         try {
             const response = await addPost(postData);
@@ -22,7 +37,7 @@ export const usePostStore = defineStore("postStore", {
     
         async fetchPosts() {
         try {
-            const response = await getPostById();
+            const response = await getUserPosts();
             if (response) {
             this.posts = response;
             return true;
@@ -31,6 +46,18 @@ export const usePostStore = defineStore("postStore", {
             console.error("Fetching posts failed:", error);
         }
         return false;
+        },
+        async fetchPostById(id) {
+        try {
+            const response = await getPostById(id);
+            if (response) {
+            this.posts = response;
+            return true;
+            }
+        } catch (error) {
+            console.error("Fetching post failed:", error);
+        }
+        return null;
         },
         async updatePosts(id, postData) {
         try {

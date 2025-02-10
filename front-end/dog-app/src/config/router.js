@@ -9,6 +9,8 @@ import UserDashboard from '../pages/users/components/UserDashboard.vue';
 import UserPosts from '../pages/users/components/UserPosts.vue';
 import AddPost from '../pages/dogs/components/AddPost.vue';
 import EditPost from '../pages/dogs/components/EditPost.vue';
+import MessagePage from '../pages/contact/MessagePage.vue';
+
 
 
 
@@ -23,6 +25,8 @@ const routes = [
   {path: '/user-posts', name: 'user-posts', component: UserPosts},
   {path: '/add-post', name: 'add-post', component: AddPost},
   {path: '/edit-post/:id', name: 'edit-post', component: EditPost, props: true},
+  
+  
 
   
 

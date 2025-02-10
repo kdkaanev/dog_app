@@ -4,6 +4,8 @@ import { RouterLink, useRoute, useRouter } from "vue-router";
 import axios from "axios";
 import { useUserStore } from "../../../stores/useUserStore";
 import { deletePost} from "../../../servvices/postServises";
+import MessgePage from "../../contact/MessagePage.vue";
+import { usePostStore } from "../../../stores/usePostSore";
 
 const route = useRoute();
 const router = useRouter();
@@ -11,25 +13,41 @@ const post = ref(null);
 const props = defineProps({
     posts: Object,
     user: Object,
+
 });
 const userStore = useUserStore();
+const postStore = usePostStore();
+const showMessge = ref(false);
 
-
-
-
-onMounted(async () => {
-  try {
-    const response = await axios.get(`http://127.0.0.1:8000/dogs/${route.params.id}`);
-    post.value = response.data;
-    await userStore.reAuthUser();
-    
-  } catch (error) {
-    console.error("Error fetching post details:", error);
-  }
+postStore.fetchPostById(route.params.id).then((response) => {
+  post.value = response;
   
+  console.log("Post details:", post.value);
+  console.log("User:", userStore.user);
+  console.log("PostStore:", postStore.posts);
+}).catch((error) => {
+  console.error("Error fetching post details:", error);
 });
+
+// onMounted(async () => {
+//   try {
+//     const response = await axios.get(`http://127.0.0.1:8000/dogs/${route.params.id}`);
+//     post.value = response.data;
+//     console.log("Post details:", post.value);
+//     console.log("User:", userStore.user);
+//     console.log("PostStore:", postStore.posts);
+   
+    
+//   } catch (error) {
+//     console.error("Error fetching post details:", error);
+//   }
+  
+// });
 const isOwner = computed(() => {
-  return userStore.user?.id === post.value?.user;
+  console.log("User:", userStore.user);
+  console.log("PostStore:", postStore.posts);
+  const user_id = userStore.user?.id;
+  return user_id === postStore.posts.user;
 });
 const editPostHandler = () => {
   router.push(`/edit-post/${post.value.id}`);
@@ -49,6 +67,15 @@ const deletePostHandler = async () => {
     }
   }
 };
+const contactHandler = () => {
+  if (!userStore.user) {
+    router.push("/login");
+    return;
+  }
+  showMessge.value = !showMessge.value;
+};
+
+
 
 
 </script>
@@ -57,34 +84,52 @@ const deletePostHandler = async () => {
 
 
 <template>
-    <article class="cart">
+    <div class="container">
+      <article class="cart">
 
-      <div v-if="post">
-        <h1 v-if="post.title">{{ post.title }}</h1>
-    <img :src="post.photo_url" alt="Dog Image" />
-    <h2>{{ post.status }}</h2>
-    <p>{{ post.description }}</p>
-    <p><strong>Breed:</strong> {{ post.breed }}</p>
-    <p><strong>Last Seen:</strong> {{ post.last_seen_location }}</p>
-    <p><strong>date:</strong> {{ post.date_posted}}</p>
-    
-    <div class="but">
-      <button @click="editPostHandler" v-if="isOwner" >Edit</button>
-    <button @click="deletePostHandler" v-if="isOwner" >Delete</button>
-    <button type="button" v-else>Contact</button>
+<div v-if="postStore.posts">
+  <h1 v-if="postStore.posts.title">{{ postStore.posts.title}}</h1>
+<img :src="postStore.posts.photo_url" alt="Dog Image" />
+<h2>{{ postStore.posts.status }}</h2>
+<p>{{ postStore.posts.description }}</p>
+<p><strong>Breed:</strong> {{ postStore.posts.breed }}</p>
+<p><strong>Last Seen:</strong> {{ postStore.posts.last_seen_location }}</p>
+<p><strong>date:</strong> {{ postStore.posts.date_posted}}</p>
+
+<div class="but">
+<button @click="editPostHandler" v-if="isOwner" >Edit</button>
+<button @click="deletePostHandler" v-if="isOwner" >Delete</button>
+<button @click="contactHandler"  v-else>Contact</button>
+</div>
+
+
+
+
+
+
+</div>
+
+<p v-else>Loading...</p>
+
+</article>
+<article>
+<div class="message">
+<MessgePage v-if="showMessge" />
+</div>
+</article>
     </div>
-    
-
-    
-
-
-
-  </div>
-  <p v-else>Loading...</p>
-    </article>
+  
   </template>
   
  <style scoped>
+ .container{
+    display: flex;
+    justify-content: center;
+    align-items:flex-start;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+}
 
 .cart{
     
@@ -98,5 +143,12 @@ const deletePostHandler = async () => {
     display: flex;
     justify-content: space-around;
 } 
+.message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
 </style>
  

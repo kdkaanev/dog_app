@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
-import { loginUser, getCurrentUser, logoutUser, saveUserProfile } from "../servvices/authServices";
+import { loginUser, getCurrentUser, logoutUser, saveUserProfile, } from "../servvices/authServices";
+import { sendMessage, getAllMessages } from "../servvices/messageServices";
 
 // Utility to get cookies
 function getCookie(name) {
@@ -75,7 +76,32 @@ export const useUserStore = defineStore("userStore", {
         console.log("User logged out.");
     }
   },
+  async sendMessage(messageData) {
+    try {
+      const response = await sendMessage(messageData);
+      if (response) {
+        console.log("Message sent:", messageData);
+        return true;
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+    return false;
   },
+  async getAllMessages() {
+    try {
+      const messages = await getAllMessages();
+      if (messages) {
+        console.log("Messages fetched:", messages);
+        return messages;
+      }
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+    }
+    return [];
+  },
+  },
+  
 });
 
 

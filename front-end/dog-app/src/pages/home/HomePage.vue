@@ -3,6 +3,7 @@
 import { getAllPosts } from '../../servvices/postServises';
 import PostCart from '../dogs/components/PostCart.vue';
 import { useUserStore } from '../../stores/useUserStore';
+import { usePostStore } from '../../stores/usePostSore';
 
 export default {
   components: {
@@ -11,6 +12,7 @@ export default {
   setup() {
     return {
       userStore: useUserStore(),
+      postStore: usePostStore(),
       
     };
   },
@@ -21,7 +23,8 @@ export default {
     };
   },
   async created() {
-    this.posts = await getAllPosts();
+    await this.postStore.fetchAllPosts();
+    this.posts = this.postStore.posts;
   },
   async mounted() {
     await this.userStore.reAuthUser();
