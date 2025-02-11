@@ -9,7 +9,10 @@ const ENDPOINT = 'message';
 
 export async function getAllMessages() {
     try {
-        const response = await axiosDA.get(`/${ENDPOINT}/`);
+        const response = await axiosDA.get(`/${ENDPOINT}/`, {
+          withCredentials: true, // Include cookies for authentication
+          
+        });
         return response.data;
       }
       catch (error) {

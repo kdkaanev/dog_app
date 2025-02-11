@@ -25,7 +25,7 @@ export default {
         return {
             form: {
                 message: '',
-                sender: this.userStore.user.id,
+                sender: this.userStore.user.dog_user.id,
                 recipient: this.postStore.posts.dog_user_id,
                 dog: this.postStore.posts.id,
             },

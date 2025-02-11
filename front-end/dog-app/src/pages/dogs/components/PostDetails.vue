@@ -6,6 +6,7 @@ import { useUserStore } from "../../../stores/useUserStore";
 import { deletePost} from "../../../servvices/postServises";
 import MessgePage from "../../contact/MessagePage.vue";
 import { usePostStore } from "../../../stores/usePostSore";
+import ReadMessage from "../../contact/ReadMessage.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -18,6 +19,7 @@ const props = defineProps({
 const userStore = useUserStore();
 const postStore = usePostStore();
 const showMessge = ref(false);
+const readMessage = ref(false);
 
 postStore.fetchPostById(route.params.id).then((response) => {
   post.value = response;
@@ -35,6 +37,7 @@ const editPostHandler = () => {
   router.push(`/edit-post/${post.value.id}`);
   
 };
+
 
 
 const deletePostHandler = async () => {
@@ -56,7 +59,14 @@ const contactHandler = () => {
   }
   showMessge.value = !showMessge.value;
 };
-
+const readMessageHandler = () => {
+  if (!userStore.user) {
+    router.push("/login");
+    return;}
+    readMessage.value = !readMessage.value;
+  
+  
+};
 
 
 
@@ -81,6 +91,7 @@ const contactHandler = () => {
 <div class="but">
 <button @click="editPostHandler" v-if="isOwner" >Edit</button>
 <button @click="deletePostHandler" v-if="isOwner" >Delete</button>
+<button @click="readMessageHandler" v-if="isOwner" >Message</button>
 <button @click="contactHandler"  v-else>Contact</button>
 </div>
 
@@ -98,6 +109,10 @@ const contactHandler = () => {
 <div class="message">
 <MessgePage v-if="showMessge" />
 </div>
+<div class="message">
+<ReadMessage v-if="readMessage" />
+</div>
+
 </article>
     </div>
   
