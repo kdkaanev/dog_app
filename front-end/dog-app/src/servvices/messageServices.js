@@ -19,8 +19,7 @@ export async function getAllMessages() {
 }
 export async function sendMessage(messageData) {
     const csrfToken = getCsrfToken();
-    console.log('CSRF Token:', csrfToken);
-    console.log('messageData:', messageData);
+    
   
     
     try {
@@ -30,7 +29,7 @@ export async function sendMessage(messageData) {
             'X-CSRFToken': csrfToken,
           },
         });
-        console.log('Message sent:', response.data);
+    
         return response.data;
       } catch (error) {
         console.error('Error adding message:', error);

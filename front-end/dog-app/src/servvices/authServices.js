@@ -54,9 +54,7 @@ export async function loginUser({username, password}, expires=30) {
     }
 }
 export async function getCurrentUser() {
-  console.log(`/${ENDPOINT}me/`);
   const csrfToken = getCsrfToken();
-  console.log('CSRF Token:', csrfToken);
   try {
     if (!csrfToken) {
       throw new Error('CSRF token not found in cookies');

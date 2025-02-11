@@ -22,30 +22,12 @@ const showMessge = ref(false);
 postStore.fetchPostById(route.params.id).then((response) => {
   post.value = response;
   
-  console.log("Post details:", post.value);
-  console.log("User:", userStore.user);
-  console.log("PostStore:", postStore.posts);
 }).catch((error) => {
   console.error("Error fetching post details:", error);
 });
 
-// onMounted(async () => {
-//   try {
-//     const response = await axios.get(`http://127.0.0.1:8000/dogs/${route.params.id}`);
-//     post.value = response.data;
-//     console.log("Post details:", post.value);
-//     console.log("User:", userStore.user);
-//     console.log("PostStore:", postStore.posts);
-   
-    
-//   } catch (error) {
-//     console.error("Error fetching post details:", error);
-//   }
-  
-// });
+
 const isOwner = computed(() => {
-  console.log("User:", userStore.user);
-  console.log("PostStore:", postStore.posts);
   const user_id = userStore.user?.id;
   return user_id === postStore.posts.user;
 });
@@ -58,7 +40,7 @@ const editPostHandler = () => {
 const deletePostHandler = async () => {
   if (confirm("Are you sure you want to delete this post?")) {
     try {
-      await deletePost(post.value.id);
+      await deletePost(postStore.posts.id);
       alert("Post deleted successfully!");
       router.push("/"); // Redirect after deletion
     } catch (error) {

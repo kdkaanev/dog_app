@@ -42,15 +42,13 @@ export default {
     },
     methods: {
         async onSubmit() {
-            console.log("store", this.postStore.posts);
-            console.log("this.form", this.form);
             const isValid = await this.v$.$validate();
             
             if (!isValid) {
                 console.error("Form is invalid");
                 return;
             }
-            console.log("this.form", this.form);
+           
             await this.userStore.sendMessage(this.form);
             this.$router.push("/");
         },

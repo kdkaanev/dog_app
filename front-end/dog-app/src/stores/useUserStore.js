@@ -8,7 +8,7 @@ function getCookie(name) {
   return match ? match[2] : null;
 }
 const csrfToken = getCookie('csrftoken');
-console.log('CSRF Token:', csrfToken);
+
 export const useUserStore = defineStore("userStore", {
   state: () => ({
     user: null, // Holds the current user data

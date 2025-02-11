@@ -16,6 +16,7 @@ import DoubleRow from '../../components/DoubleRow.vue';
         },
         data() {
             const post = ref(null);
+            
     return {
       formEdit: {
         title: "",
@@ -50,6 +51,7 @@ import DoubleRow from '../../components/DoubleRow.vue';
     };
   },
         methods: {
+          
             async onEditPost() {
                 const isValid = await this.v$.$validate();
                 if (!isValid) {
@@ -61,12 +63,13 @@ import DoubleRow from '../../components/DoubleRow.vue';
         },
         async mounted() {
             await this.userStore.reAuthUser();
-            console.log(this.userStore.user);
-            console.log(this.currentPost.post); 
+          
+           
         },
         async created() {
-            const postId = this.$route.params.id;
-            this.post = await getPostById(postId);
+          await this.currentPost.fetchPosts();
+          this.post = this.currentPost.posts[0]
+      
             this.formEdit.title = this.post.title;
             this.formEdit.breed = this.post.breed;
             this.formEdit.photo_url = this.post.photo_url;
@@ -74,7 +77,7 @@ import DoubleRow from '../../components/DoubleRow.vue';
             this.formEdit.last_seen_location = this.post.last_seen_location;
             this.formEdit.status = this.post.status;
 
-            console.log(this.post);
+            
         },
     };
 
