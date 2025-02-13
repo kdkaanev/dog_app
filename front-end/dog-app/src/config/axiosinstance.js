@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosDA = axios.create({
-  baseURL: 'https://pawnpall.azurewebsites.net/',
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
