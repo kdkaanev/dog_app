@@ -1,10 +1,32 @@
 import axiosDA from '../config/axiosinstance';
 
+axiosDA.defaults.withCredentials = true;
+axiosDA.defaults.xsrfHeaderName = "X-CSRFToken";
+axiosDA.defaults.xsrfCookieName = "csrftoken";
 
-const getCsrfToken = () => {
-  const match = document.cookie.match(/csrftoken=([^;]+)/);
-  return match ? match[1] : null;
-};
+
+// const getCsrfToken = () => {
+//   const match = document.cookie.match(/csrftoken=([^;]+)/);
+//   return match ? match[1] : null;
+// };
+
+async function fetchCSRFToken() {
+  const response = await axiosDA.get("https://pawnpall.azurewebsites.net/csrf/");
+  document.cookie = `csrftoken=${response.data.csrfToken}; path=/`;
+}
+
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== "") {
+    document.cookie.split(";").forEach(cookie => {
+      const trimmed = cookie.trim();
+      if (trimmed.startsWith(name + "=")) {
+        cookieValue = trimmed.substring(name.length + 1);
+      }
+    });
+  }
+  return cookieValue;
+}
 
 const ENDPOINT = 'auth/';
 
@@ -28,7 +50,7 @@ export async function registerUser(user) {
 
 export async function loginUser({username, password}, expires=30) {
     try {
-      const csrfToken = getCsrfToken();
+      await fetchCSRFToken();
      
         const response = await axiosDA.post(`/${ENDPOINT}login/`, {
           username: username,
@@ -37,9 +59,8 @@ export async function loginUser({username, password}, expires=30) {
 
         }, {
            
-            withCredentials: true,
             headers: {
-              'X-CSRFToken': csrfToken,
+              "X-CSRFToken": getCookie("csrftoken"),
             },
         });
         
@@ -54,16 +75,15 @@ export async function loginUser({username, password}, expires=30) {
     }
 }
 export async function getCurrentUser() {
-  const csrfToken = getCsrfToken();
+  await fetchCSRFToken();
+
   try {
-    if (!csrfToken) {
-      throw new Error('CSRF token not found in cookies');
-    }
+   
     const res = await axiosDA.get(`/${ENDPOINT}me/`, {
       withCredentials: true,
       
       headers: {
-        'X-CSRFToken': getCsrfToken(),
+        'X-CSRFToken': getCookie('csrftoken'),
       },
     
     });
@@ -74,12 +94,13 @@ export async function getCurrentUser() {
   }
 }
 export async function saveUserProfile(profileData) {
+    await fetchCSRFToken();
   try {
     const response = await axiosDA.patch(`/${ENDPOINT}me/`, profileData,{
       withCredentials: true,
       
       headers: {
-        'X-CSRFToken': getCsrfToken(),
+        'X-CSRFToken': getCookie('csrftoken'),
       },
     
     });
@@ -91,13 +112,14 @@ export async function saveUserProfile(profileData) {
 }
 
 export async function logoutUser() {
+  await fetchCSRFToken();
   try {
-    const csrfToken = getCsrfToken();
+    
     const response = await axiosDA.post(`/${ENDPOINT}logout/`, {}, {
 
       withCredentials: true,
       headers: {
-        'X-CSRFToken': csrfToken,
+        'X-CSRFToken': getCookie('csrftoken'),
       },
     });
     

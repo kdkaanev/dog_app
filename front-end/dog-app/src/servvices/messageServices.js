@@ -1,10 +1,32 @@
 import axiosDA from '../config/axiosinstance';
 
-const getCsrfToken = () => {
-    const match = document.cookie.match(/csrftoken=([^;]+)/);
-    return match ? match[1] : null;
-  };
+axiosDA.defaults.withCredentials = true;
+axiosDA.defaults.xsrfHeaderName = "X-CSRFToken";
+axiosDA.defaults.xsrfCookieName = "csrftoken";
 
+
+// const getCsrfToken = () => {
+//   const match = document.cookie.match(/csrftoken=([^;]+)/);
+//   return match ? match[1] : null;
+// };
+
+async function fetchCSRFToken() {
+  const response = await axiosDA.get("https://pawnpall.azurewebsites.net/csrf/");
+  document.cookie = `csrftoken=${response.data.csrfToken}; path=/`;
+}
+
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== "") {
+    document.cookie.split(";").forEach(cookie => {
+      const trimmed = cookie.trim();
+      if (trimmed.startsWith(name + "=")) {
+        cookieValue = trimmed.substring(name.length + 1);
+      }
+    });
+  }
+  return cookieValue;
+}
 const ENDPOINT = 'message';
 
 export async function getAllMessages() {
@@ -21,15 +43,15 @@ export async function getAllMessages() {
       }
 }
 export async function sendMessage(messageData) {
-    const csrfToken = getCsrfToken();
+    await fetchCSRFToken();
     
   
     
     try {
         const response = await axiosDA.post(`/${ENDPOINT}/`, messageData, {
-          withCredentials: true, // Include cookies for authentication
+       
           headers: {
-            'X-CSRFToken': csrfToken,
+            'X-CSRFToken': getCookie('csrftoken'),
           },
         });
     

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosDA = axios.create({
-  baseURL: 'http://127.0.0.1:8000',
+  baseURL: 'https://pawnpall.azurewebsites.net/',
   headers: {
     'Content-Type': 'application/json',
   },
