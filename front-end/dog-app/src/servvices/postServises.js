@@ -1,12 +1,33 @@
 import axiosDA from '../config/axiosinstance';
-const getCsrfToken = () => {
-  const match = document.cookie.match(/csrftoken=([^;]+)/);
-  return match ? match[1] : null;
-};
-
+// const getCsrfToken = () => {
+//   const match = document.cookie.match(/csrftoken=([^;]+)/);
+//   return match ? match[1] : null;
+// };
+axiosDA.defaults.withCredentials = true;
+axiosDA.defaults.xsrfHeaderName = "X-CSRFToken";
+axiosDA.defaults.xsrfCookieName = "csrftoken";
 
 const ENDPOINT = 'dogs';
-const USER_ENDPOINT = 'http://127.0.0.1:8000/posts/user/'
+const USER_ENDPOINT = 'https://pawnpall.azurewebsites.net/posts/user/'
+
+async function fetchCSRFToken() {
+  const response = await axiosDA.get("https://pawnpall.azurewebsites.net/csrf/");
+  document.cookie = `csrftoken=${response.data.csrfToken}; path=/`;
+}
+
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== "") {
+    document.cookie.split(";").forEach(cookie => {
+      const trimmed = cookie.trim();
+      if (trimmed.startsWith(name + "=")) {
+        cookieValue = trimmed.substring(name.length + 1);
+      }
+    });
+  }
+  return cookieValue;
+}
+
 
 export async function getAllPosts() {
   try {
@@ -32,14 +53,13 @@ export async function getUserPosts() {
 }
 
 export async function addPost(postData) {
-  const csrfToken = getCsrfToken();
-  console.log('CSRF Token:', csrfToken);
-  console.log('postData:', postData);
+  await fetchCSRFToken();
+ 
   try {
     const response = await axiosDA.post(`/${ENDPOINT}/`, postData, {
-      withCredentials: true, // Include cookies for authentication
+      
       headers: {
-        'X-CSRFToken': csrfToken,
+        'X-CSRFToken': getCookie('csrftoken'),
       },
     });
     return response.data;
@@ -59,12 +79,12 @@ export async function getPostById(id) {
   }
 }
 export async function updatePost(id, postData) {
-  const csrfToken = getCsrfToken();
+  await fetchCSRFToken();
   try {
     const response = await axiosDA.put(`/${ENDPOINT}/${id}/`, postData, {
-      withCredentials: true, // Include cookies for authentication
+
       headers: {
-        'X-CSRFToken': csrfToken,
+        'X-CSRFToken': getCookie('csrftoken'),
       },
     });
     return response.data;
@@ -77,12 +97,12 @@ export async function updatePost(id, postData) {
 
 
 export async function deletePost(id) {
-  const csrfToken = getCsrfToken();
+  await fetchCSRFToken();
   try {
     const response = await axiosDA.delete(`/${ENDPOINT}/${id}/`, {
-      withCredentials: true, // Include cookies for authentication
+      
       headers: {
-        'X-CSRFToken': csrfToken,
+        'X-CSRFToken': getCookie('csrftoken'),
       },
     });
     return response.data;
