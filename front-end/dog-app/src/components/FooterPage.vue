@@ -37,6 +37,7 @@ import { faUser, faCog, faSignOutAlt, faRegistered, faSign, faSignIn, faSignInAl
 
 <style scoped>
     footer {
+        position: relative;
         margin: 8px 0 0 0;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -45,10 +46,17 @@ import { faUser, faCog, faSignOutAlt, faRegistered, faSign, faSignIn, faSignInAl
             "logo links social"
             "copirigth copirigth copirigth";
   background-color:rgb(250 222 175);
+  justify-items: stretch;
+  border-radius: 4px;
   
     }
     .ico {
+        padding: 0;
         grid-area: logo;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
         
     }
     .links {
