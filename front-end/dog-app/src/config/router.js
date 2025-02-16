@@ -10,6 +10,7 @@ import UserPosts from '../pages/users/components/UserPosts.vue';
 import AddPost from '../pages/dogs/components/AddPost.vue';
 import EditPost from '../pages/dogs/components/EditPost.vue';
 import MessagePage from '../pages/contact/MessagePage.vue';
+import ShowPosts from '../pages/dogs/components/ShowPosts.vue';
 
 
 
@@ -25,6 +26,7 @@ const routes = [
   {path: '/user-posts', name: 'user-posts', component: UserPosts},
   {path: '/add-post', name: 'add-post', component: AddPost},
   {path: '/edit-post/:id', name: 'edit-post', component: EditPost, props: true},
+  {path: '/show-posts', name: 'show-posts', component: ShowPosts},
   
   
 

@@ -37,7 +37,7 @@ import { faUser, faCog, faSignOutAlt, faRegistered, faSign, faSignIn, faSignInAl
 
 <style scoped>
     footer {
-        position: relative;
+       
         margin: 8px 0 0 0;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;

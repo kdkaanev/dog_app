@@ -1,12 +1,11 @@
 <script>
 
-
+import HomePage from './pages/home/HomePage.vue';
 import HeaderPage from '../src/components/HeaderPage.vue';
 import FooterPage from '../src/components/FooterPage.vue';
 import Register from './pages/register/components/SignupUser.vue';
 import Login from '../src/pages/users/components/LoginUser.vue';
 import PostDetails from '../src/pages/dogs/components/PostDetails.vue';
-import HomePage from './pages/home/HomePage.vue';
 import PostCart from './pages/dogs/components/PostCart.vue';
 import router from './config/router';
 
@@ -20,7 +19,7 @@ export default {
     Login,
     PostDetails,
     PostCart,
-    FooterPage
+    FooterPage,
   },
   router,
 }
@@ -35,6 +34,12 @@ export default {
   <main>
     <router-view />
   </main>
-  <FooterPage/>
+  <footer>
+    <FooterPage/>
+  </footer>
+    
+  
+    
   </article>
 </template>
+
