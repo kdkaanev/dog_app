@@ -19,6 +19,11 @@
   </template>
   
   <style scoped>
+  @media (max-width: 600px) {
+    .steps {
+      flex-direction: column;
+    }
+  }
   .how-it-works {
     text-align: center;
     padding: 2rem;
