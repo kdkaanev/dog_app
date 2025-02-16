@@ -36,8 +36,51 @@ import { faUser, faCog, faSignOutAlt, faRegistered, faSign, faSignIn, faSignInAl
 
 
 <style scoped>
+@media (max-width: 600px) {
     footer {
-       
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: 
+            "logo"
+            "links"
+            "social"
+            "copirigth";
+    }
+    .ico {
+        padding: 0;
+        grid-area: logo;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .links {
+        padding: 0;
+        grid-area: links;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .social {
+        grid-area: social;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .copirigth {
+        border-top: 1px solid #fa9338 ;
+        grid-area: copirigth;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    li {
+        list-style-type: none;
+        padding: 10px;
+    }
+}
+    footer {
+        
         margin: 8px 0 0 0;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;

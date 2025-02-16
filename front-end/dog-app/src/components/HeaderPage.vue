@@ -117,13 +117,54 @@ export default {
 </template>
 
 <style scoped>
+@media (max-width: 600px) {
+  .nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  .ico {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .slogan {
+    padding: 1rem;
+    text-align: center;
+  }
+  .dropdown {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .dropdown-menu {
+    width: 100%;
+  }
+  .dropdown-menu li {
+    padding: 10px;
+  }
+  .dropdown-menu li a,
+  .dropdown-menu li button {
+    font-size: small;
+    text-decoration: none;
+    color: #333;
+    display: inline;
+    width: 100%;
+    text-align: center;
+  }
+  .dropdown-menu-item {
+    margin: 0;
+    white-space: pre;
+  }
+}
 nav{
   position: relative;
   display: flex;
   flex-wrap: wrap;
   background-color:rgb(250 222 175);
-  justify-content: space-between;
-  gap: 3rem;
+  justify-content:space-around;
+  gap: 1rem;
   border-radius: 4px;
   padding:0 1rem 0 1rem  ;
 }
@@ -162,9 +203,6 @@ font-family: "Playwrite AU SA", serif;
 
 .dropdown {
   padding: 0.5rem;
-
- flex-grow: 1;
-  flex-basis: 200;
   
 }
 
