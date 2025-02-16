@@ -2,6 +2,7 @@
 
 
 import HeaderPage from '../src/components/HeaderPage.vue';
+import FooterPage from '../src/components/FooterPage.vue';
 import Register from './pages/register/components/SignupUser.vue';
 import Login from '../src/pages/users/components/LoginUser.vue';
 import PostDetails from '../src/pages/dogs/components/PostDetails.vue';
@@ -19,6 +20,7 @@ export default {
     Login,
     PostDetails,
     PostCart,
+    FooterPage
   },
   router,
 }
@@ -33,5 +35,6 @@ export default {
   <main>
     <router-view />
   </main>
+  <FooterPage/>
   </article>
 </template>
