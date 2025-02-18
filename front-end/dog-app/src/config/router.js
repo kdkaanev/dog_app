@@ -11,6 +11,7 @@ import AddPost from '../pages/dogs/components/AddPost.vue';
 import EditPost from '../pages/dogs/components/EditPost.vue';
 import MessagePage from '../pages/contact/MessagePage.vue';
 import ShowPosts from '../pages/dogs/components/ShowPosts.vue';
+import { useUserStore } from '../stores/useUserStore';
 
 
 
@@ -37,6 +38,15 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+router.beforeEach((to, from, next) => {
+  const userStore = useUserStore();
+  if (to.meta.requiresAuth && !userStore.isAuthenticated) {
+    // Store the intended route in a query param or localStorage
+    next({ path: '/login', query: { redirect: to.fullPath } });
+  } else {
+    next();
+  }
 });
 
 export default router;

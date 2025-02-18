@@ -1,7 +1,15 @@
 <script setup>
 import { useRouter } from "vue-router";
+import { onMounted, ref } from 'vue';
+import { useUserStore } from '../../../stores/useUserStore';
 const router = useRouter();
 const navigateTo = (path) => router.push(path);
+
+const userStore = useUserStore();
+onMounted(() => {
+  userStore.reAuthUser();
+});
+
 </script>
 <template>
     <section class="hero">
@@ -9,7 +17,8 @@ const navigateTo = (path) => router.push(path);
       <div>
         <h1>Helping Lost Pets Find Their Way Home</h1>
       <p>Join our community to help reunite lost pets with their owners.</p>
-      <button @click="navigateTo('/report')">Report a Lost Pet</button>
+      <button v-if="userStore.user" @click="navigateTo('/add-post')">Report a Lost Pet</button>
+      <button v-else @click="navigateTo('/login')">Report a Lost Pet</button>
       <button @click="navigateTo('/show-posts')">Browse Listings</button>
     </div>
     </section>

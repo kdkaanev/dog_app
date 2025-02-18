@@ -2,8 +2,10 @@
 import FormFieldset from '../../components/FormFieldset.vue';
 import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { loginUser} from '../../../servvices/authServices';
+
 import { useUserStore } from '../../../stores/useUserStore';
+import { useRouter, useRoute } from 'vue-router';
+
 
 export default {
   components: {
@@ -13,6 +15,8 @@ export default {
     return {
       v$: useVuelidate(),
       userStore: useUserStore(),
+      route : useRoute(),
+      router: useRouter(),
       
     };
   },
@@ -40,7 +44,8 @@ export default {
         return;
       }
       await this.userStore.loginUser(this.form);
-      this.$router.push("/"); TODO:'redirect to prevues page' 
+      const redirect = this.route.query.redirect || "/";
+      this.$router.push(redirect);
     },
   },
   async mounted() {
@@ -57,10 +62,14 @@ export default {
 <div class="form">
 <article>
   <form @submit.prevent="onLogin">
-  <FormFieldset title="Username" :errors="v$.form.username.$errors">
+    <p>Don't have an account?  <router-link to="/register">Sign up</router-link></p>
+    
+    <h5>OR</h5>
+
+  <FormFieldset  :errors="v$.form.username.$errors">
     <input v-model="v$.form.username.$model" type="text" placeholder="Enter Username"/>
    </FormFieldset>
-    <FormFieldset title="Password" :errors="v$.form.password.$errors">
+    <FormFieldset  :errors="v$.form.password.$errors">
       <input 
       v-model="v$.form.password.$model"
       type="password" placeholder="Enter Password"/>

@@ -1,7 +1,6 @@
 <script setup>
 import HeroSection from './components/HeroSection.vue';
 import HowItWorks from './components/HowItWorks.vue';
-import SuccessStories from './components/SuccessStories.vue';
 import CallToAction from './components/CallToAction.vue';
 
 </script>
@@ -12,9 +11,6 @@ import CallToAction from './components/CallToAction.vue';
    <div class="homepage">
     <HeroSection />
     <HowItWorks />
-    <SearchBar />
-    <!-- <SuccessStories /> -->
-    <Testimonials />
     <CallToAction />
   
   </div>

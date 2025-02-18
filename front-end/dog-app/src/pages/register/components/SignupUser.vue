@@ -4,9 +4,11 @@ import { alphaNum, email, helpers, maxLength, minLength, numeric, required, same
 import { computed, reactive, ref, toRefs, watch } from 'vue';
 import FormFieldset from '../../components/FormFieldset.vue';
 import { registerUser } from '../../../servvices/authServices/';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
+import { useUserStore } from '../../../stores/useUserStore';
 
-
+const userStore = useUserStore();
+const route = useRoute();
 const router = useRouter();
 
 const stateForm = ref({
