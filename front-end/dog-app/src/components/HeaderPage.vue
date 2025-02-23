@@ -79,7 +79,7 @@ export default {
   </div>
   <p class="slogan">
         Where Lost Paws Find Their Way Home
-    </p>
+  </p>
     <font-awesome-icon icon="fa-light fa-right-from-bracket" />
   
   
@@ -169,6 +169,7 @@ nav{
   padding:0 1rem 0 1rem  ;
 }
 .slogan {
+  color: #fa9338;
 font-family: "Playwrite AU SA", serif;
   font-optical-sizing: auto;
   font-weight:bold;

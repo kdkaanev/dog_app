@@ -10,7 +10,8 @@ import { faUser, faCog, faSignOutAlt, faRegistered, faSign, faSignIn, faSignInAl
 
 <template>
     <footer>
-        <div class="ico">
+<section class="footer">
+    <div class="ico">
     <img src="../assets/icon.ico" alt="" width="60px">
    
   </div>
@@ -28,60 +29,35 @@ import { faUser, faCog, faSignOutAlt, faRegistered, faSign, faSignIn, faSignInAl
     </ul>
     <div class="copirigth">
     
-      <p>&copy; 2021 PawPal</p>
+      <p>&copy; 2025 PawPal</p>
     </div>
-    </footer>
+</section>
+</footer>
 
 </template>
 
 
 <style scoped>
-@media (max-width: 600px) {
-    footer {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        grid-template-areas: 
-            "logo"
-            "links"
-            "social"
-            "copirigth";
-    }
-    .ico {
+    @media only screen and (max-width: 600px) {
+  .footer {
+   display: flex !important;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: center;
+    ul{
         padding: 0;
-        grid-area: logo;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
-    .links {
-        padding: 0;
-        grid-area: links;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    ul > li> a {
+        text-decoration: none;
+        color: #ff6600;
     }
-    .social {
-        grid-area: social;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .copirigth {
-        border-top: 1px solid #fa9338 ;
-        grid-area: copirigth;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    li {
-        list-style-type: none;
-        padding: 10px;
-    }
+
+  }
+  
 }
-    footer {
+.footer {
         
-        margin: 8px 0 0 0;
+        margin: 0;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto;
@@ -109,6 +85,8 @@ import { faUser, faCog, faSignOutAlt, faRegistered, faSign, faSignIn, faSignInAl
         justify-content:space-between;
         align-items: center;
 
+       
+
     }
     .social {
         grid-area: social;
@@ -117,16 +95,25 @@ import { faUser, faCog, faSignOutAlt, faRegistered, faSign, faSignIn, faSignInAl
         align-items: center;
     }
     .copirigth {
+        font-family: "Playwrite AU SA", serif;
         border-top: 1px solid #fa9338 ;
         grid-area: copirigth;
         display: flex;
         justify-content: center;
         align-items: center;
     }
+
     li {
+
         list-style-type: none;
         padding: 10px;
         
+        
+    }
+    ul > li> a {
+       
+        text-decoration: none;
+        color: #ff6600;
     }
   
 </style>

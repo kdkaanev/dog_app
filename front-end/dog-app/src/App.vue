@@ -13,13 +13,14 @@ import router from './config/router';
 
 export default {
   components: {
+    FooterPage,
     HeaderPage,
     HomePage,
     Register,
     Login,
     PostDetails,
     PostCart,
-    FooterPage,
+    
   },
   router,
 }
@@ -34,9 +35,9 @@ export default {
   <main>
     <router-view />
   </main>
-  <footer>
+ 
     <FooterPage/>
-  </footer>
+  
     
   
     
