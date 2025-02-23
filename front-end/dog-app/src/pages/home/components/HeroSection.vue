@@ -59,5 +59,8 @@ onMounted(() => {
     border-radius: 50%;
     
   }
+  p{
+    font-family: "Playwrite AU SA", serif;
+  }
   </style>
   

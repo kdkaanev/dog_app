@@ -74,7 +74,7 @@ export default {
     <article>
       <form @submit.prevent="onAddPost">
      <DoubleRow>
-      <FormFieldset title="Title" :errors="v$.formAdd.title.$errors">
+      <FormFieldset title="Name" :errors="v$.formAdd.title.$errors">
         <input v-model="v$.formAdd.title.$model" type="text" />
       </FormFieldset>
       <FormFieldset title="Breed" :errors="v$.formAdd.breed.$errors">
