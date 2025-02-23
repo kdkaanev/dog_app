@@ -9,6 +9,7 @@ export default {
   components: {
     PostCart,
   },
+  
   setup() {
     return {
       userStore: useUserStore(),
@@ -16,11 +17,24 @@ export default {
       
     };
   },
-
+  props: {
+    post: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       posts: [],
     };
+  },
+  computed: {
+    filtredPosts() {
+      if (!this.userStore.user) {
+        return this.posts;
+      }
+      return this.posts.filter((post) => post.user !== this.userStore.user.id);
+    },
   },
   async created() {
     await this.postStore.fetchAllPosts();
@@ -29,8 +43,9 @@ export default {
   async mounted() {
     await this.userStore.reAuthUser();
   },
-  
 };
+
+
 </script>
 
 
@@ -42,7 +57,7 @@ export default {
       <router-link to="/user-posts">Add Post</router-link>
     </div>
     <article class="background">
-      <PostCart v-for="post in posts" :key="post.id" :post="post" />
+      <PostCart v-for="post in filtredPosts" :key="post.id" :post="post" />
     </article>
   </div>
 </template>
