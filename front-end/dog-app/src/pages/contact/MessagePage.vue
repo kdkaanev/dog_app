@@ -63,7 +63,7 @@ export default {
 <template>
     
     <form @submit.prevent="onSubmit">
-        <FormFieldset title="Message" :errors="v$.form.message.$errors">
+        <FormFieldset :errors="v$.form.message.$errors">
             <label for="name">Message</label>
             <input v-model="v$.form.message.$model" type="text" />
         </FormFieldset>

@@ -67,7 +67,14 @@ const readMessageHandler = () => {
   
   
 };
-
+const dateFormated = computed(() => {
+  const date = new Date(postStore.posts.date_posted);
+  return date.toDateString();
+});
+const postUser = computed(() => {
+  return postStore.posts.dog_user_name;
+  
+});
 
 
 </script>
@@ -86,7 +93,8 @@ const readMessageHandler = () => {
 <p>{{ postStore.posts.description }}</p>
 <p><strong>Breed:</strong> {{ postStore.posts.breed }}</p>
 <p><strong>Last Seen:</strong> {{ postStore.posts.last_seen_location }}</p>
-<p><strong>date:</strong> {{ postStore.posts.date_posted}}</p>
+<p><strong>Date:</strong> {{ dateFormated}}</p>
+<p><strong>Post by:</strong> {{ postUser}}</p>
 
 <div class="but">
 <button @click="editPostHandler" v-if="isOwner" >Edit</button>
@@ -105,7 +113,7 @@ const readMessageHandler = () => {
 <p v-else>Loading...</p>
 
 </article>
-<article>
+
 <div class="message">
 <MessgePage v-if="showMessge" />
 </div>
@@ -113,7 +121,7 @@ const readMessageHandler = () => {
 <ReadMessage v-if="readMessage" />
 </div>
 
-</article>
+
     </div>
   
   </template>
