@@ -1,8 +1,8 @@
 <script setup>
 defineProps({
   post: Object,
-});
 
+});
 </script>
 
 
@@ -12,7 +12,8 @@ defineProps({
     <router-link :to="{ name: 'PostDetails', params: { id: post.id } }">
       <div class="cart" :class="post.status === 'lost' ? 'lost' : 'found'">
         <img :src="post.photo_url" alt="Dog Image" />
-        <h3>{{ post.status }}</h3>
+        <h3 class="status">{{ post.status }}</h3>
+        <span v-if="post.has_messages" class="message-icon">📩</span>
       </div>
     </router-link>
   </template>
@@ -41,5 +42,13 @@ border-radius: 8px;
 .found{
     background-color: #b9f9b9;
 }
+.status {
+ display: inline-block;
 
+}
+.message-icon {
+  font-size: 1.5rem;
+  display: inline-block;
+  margin-left: 1rem;
+}
 </style>

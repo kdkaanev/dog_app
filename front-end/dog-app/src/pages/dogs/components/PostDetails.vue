@@ -7,6 +7,7 @@ import { deletePost} from "../../../servvices/postServises";
 import MessgePage from "../../contact/MessagePage.vue";
 import { usePostStore } from "../../../stores/usePostSore";
 import ReadMessage from "../../contact/ReadMessage.vue";
+import { useMessageStore } from "../../../stores/useMessageSore";
 
 const route = useRoute();
 const router = useRouter();
@@ -20,6 +21,19 @@ const userStore = useUserStore();
 const postStore = usePostStore();
 const showMessge = ref(false);
 const readMessage = ref(false);
+const message = useMessageStore();
+
+onMounted(() => {
+  getMessages();
+});
+const getMessages = async () => {
+  try {
+    await message.fetchAllMessages();
+  } catch (error) {
+    console.error("Error fetching messages:", error);
+  }
+};
+
 
 postStore.fetchPostById(route.params.id).then((response) => {
   post.value = response;
@@ -75,6 +89,11 @@ const postUser = computed(() => {
   return postStore.posts.dog_user_name;
   
 });
+const messageNumber = computed(() => {
+  return message.messages.length;
+});
+
+
 
 
 </script>
@@ -99,7 +118,7 @@ const postUser = computed(() => {
 <div class="but">
 <button @click="editPostHandler" v-if="isOwner" >Edit</button>
 <button @click="deletePostHandler" v-if="isOwner" >Delete</button>
-<button @click="readMessageHandler" v-if="isOwner" >Message</button>
+<button @click="readMessageHandler" v-if="isOwner" >Message {{ messageNumber}}</button>
 <button @click="contactHandler"  v-else>Contact</button>
 </div>
 

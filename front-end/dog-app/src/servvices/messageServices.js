@@ -42,6 +42,7 @@ export async function getAllMessages() {
         return [];
       }
 }
+
 export async function sendMessage(messageData) {
     await fetchCSRFToken();
     

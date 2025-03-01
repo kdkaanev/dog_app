@@ -30,6 +30,14 @@ async created() {
 async mounted() {
     await this.userStore.reAuthUser();
 },
+computed: {
+    filtredMessages() {
+        if (!this.userStore.user) {
+            return this.dogMessages;
+        }
+        return this.dogMessages.filter((message) => message.dog === this.postStore.posts.id);
+    },
+},
     
 };
 
@@ -38,7 +46,7 @@ async mounted() {
 <template>
     
     <article>
-        <MessageCart v-for="message in dogMessages" :key="message.id" :message="message" />
+        <MessageCart v-for="message in this.filtredMessages" :key="message.id" :message="message" />
             
     </article>
 </template>
