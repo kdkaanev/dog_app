@@ -1,6 +1,7 @@
 <script setup>
 defineProps({
   post: Object,
+  showMessageIcon: Boolean,
 
 });
 </script>
@@ -13,7 +14,7 @@ defineProps({
       <div class="cart" :class="post.status === 'lost' ? 'lost' : 'found'">
         <img :src="post.photo_url" alt="Dog Image" />
         <h3 class="status">{{ post.status }}</h3>
-        <span v-if="post.has_messages" class="message-icon">📩</span>
+        <span v-if="post.has_messages && showMessageIcon" class="message-icon">📩</span>
       </div>
     </router-link>
   </template>
