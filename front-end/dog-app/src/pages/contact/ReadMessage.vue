@@ -49,4 +49,4 @@ computed: {
         <MessageCart v-for="message in this.filtredMessages" :key="message.id" :message="message" />
             
     </article>
-</template>
+</template>z
